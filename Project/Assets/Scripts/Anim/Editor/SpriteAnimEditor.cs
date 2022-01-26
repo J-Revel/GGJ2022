@@ -72,18 +72,25 @@ public class AnimEditor : EditorWindow
         }
         if(newAnimList != null)
         {
-            string[] animNames = new string[newAnimList.spriteAnims.Length];
+            string[] animNames = new string[newAnimList.spriteAnims.Length + 1];
             for(int i=0; i<newAnimList.spriteAnims.Length; i++)
             {
                 NamedSpriteAnim animElement = newAnimList.spriteAnims[i];
                 string animName = animElement.name;
                 animNames[i] = animName;
             }
+            animNames[newAnimList.spriteAnims.Length] = "+";
             int newSelectedAnimIndex = EditorGUILayout.Popup("animation", selectedAnimIndex, animNames);
-            if(newSelectedAnimIndex != selectedAnimIndex)
+            if(newSelectedAnimIndex == newAnimList.spriteAnims.Length)
+            {
+                NamedSpriteAnim newAnim = new NamedSpriteAnim();
+                newAnim.name = "new anim";
+                newAnimList.spriteAnims = ArrayUtil<NamedSpriteAnim>.Append(newAnimList.spriteAnims, newAnim);
+                EditorUtility.SetDirty(newAnimList);
+            }
+            else if(newSelectedAnimIndex != selectedAnimIndex)
             {
                 selectedAnimIndex = newSelectedAnimIndex;
-                Debug.Log(selectedAnimIndex);
             }
             NamedSpriteAnim selectedAnimElement = newAnimList.spriteAnims[selectedAnimIndex];
             EditorGUILayout.BeginHorizontal();
@@ -94,6 +101,25 @@ public class AnimEditor : EditorWindow
                     newAnimList.spriteAnims[selectedAnimIndex].name = newName;
                     EditorUtility.SetDirty(newAnimList);
                 }
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.BeginHorizontal();
+            for(int i=0; i<selectedAnimElement.spriteAnim.sprites.Length; i++)
+            {
+                Sprite newSprite = (Sprite)EditorGUILayout.ObjectField(selectedAnimElement.spriteAnim.sprites[i], typeof(Sprite), false, GUILayout.Width(70), GUILayout.Height(70));
+                if(newSprite != selectedAnimElement.spriteAnim.sprites[i])
+                {
+                    selectedAnimElement.spriteAnim.sprites[i] = newSprite;
+                    EditorUtility.SetDirty(newAnimList);
+                }
+                if(GUILayout.Button("-", GUILayout.Width(20), GUILayout.Height(20)))
+                {
+                    selectedAnimElement.spriteAnim.sprites = ArrayUtil<Sprite>.Remove(selectedAnimElement.spriteAnim.sprites, i);
+                }
+            }
+            if(GUILayout.Button("+", GUILayout.Width(70), GUILayout.Height(70)))
+            {
+                selectedAnimElement.spriteAnim.sprites = ArrayUtil<Sprite>.Append(selectedAnimElement.spriteAnim.sprites, null);
+            }
             EditorGUILayout.EndHorizontal();
             float newFramePerSecond = EditorGUILayout.FloatField(selectedAnimElement.spriteAnim.framePerSecond);
             if(newFramePerSecond != selectedAnimElement.spriteAnim.framePerSecond)

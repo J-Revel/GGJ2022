@@ -12,5 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13426e9ead40efb40b3fde96cfad97aa, type: 3}
   m_Name: Test Sprite Anim
   m_EditorClassIdentifier: 
-  spriteAnims: []
+  spriteAnims:
+  - name: Test
+    spriteAnim:
+      sprites:
+      - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+      - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+      - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      actionPoints: []
+      framePerSecond: 0
+      loop: 0
+  - name: 
+    spriteAnim:
+      sprites: []
+      actionPoints: []
+      framePerSecond: 24
+      loop: 1
+  - name: 
+    spriteAnim:
+      sprites: []
+      actionPoints: []
+      framePerSecond: 24
+      loop: 1
+  - name: test anim
+    spriteAnim:
+      sprites:
+      - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+      actionPoints: []
+      framePerSecond: 24
+      loop: 1
   actionPointNames: []
