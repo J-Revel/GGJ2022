@@ -43,4 +43,12 @@ MonoBehaviour:
       actionPoints: []
       framePerSecond: 24
       loop: 1
+  - name: new anim
+    spriteAnim:
+      sprites:
+      - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      - {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+      actionPoints: []
+      framePerSecond: 24
+      loop: 1
   actionPointNames: []

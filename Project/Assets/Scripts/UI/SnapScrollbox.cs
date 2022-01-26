@@ -17,17 +17,26 @@ public class SnapScrollbox : MonoBehaviour, IEndDragHandler, IDragHandler
     public float dragOffsetScale = 2;
     public bool scrollToTarget;
     public int teleportValue = 0;
-    private bool mustTeleport = true;
+    private bool mustTeleport = false;
 
     private float dragStartValue;
-    private int currentTargetIndex;
-    public GameObject nextButton;
-    public GameObject previousButton;
+    private int currentTargetIndex = 0;
+    public Button nextButton;
+    public Button previousButton;
 
     void Start()
     {
         scrollRect = GetComponent<ScrollRect>();
-        UpdateButtonsVisibility();
+        previousButton.gameObject.SetActive(false);
+        nextButton.gameObject.SetActive(true);
+        if(nextButton != null)
+        {
+            nextButton.onClick.AddListener(() => {SelectNext();});
+        }
+        if(previousButton != null)
+        {
+            previousButton.onClick.AddListener(() => {SelectPrevious();});
+        }
     }
 
     public void OnDrag(PointerEventData data)
@@ -90,6 +99,8 @@ public class SnapScrollbox : MonoBehaviour, IEndDragHandler, IDragHandler
             float childCenterPos = (childMinPos + childMaxPos) / 2;
             scrollRect.normalizedPosition = new Vector2(PositionToScrollValue(childCenterPos), 0);
             targetValue = PositionToScrollValue(childCenterPos);
+            Debug.Log(childRect.anchoredPosition);
+            Debug.Log(childRect.rect.xMin);
             mustTeleport = false;
         }
         else if(scrollToTarget)
@@ -138,7 +149,11 @@ public class SnapScrollbox : MonoBehaviour, IEndDragHandler, IDragHandler
                 neighborChildIndex = closestElementIndex - 1;
             }
             float neighborDistance = GetChildSignedDistanceToViewCenter(neighborChildIndex);
-            value = Mathf.Clamp(closestElementIndex + (neighborChildIndex - closestElementIndex) * closestChildDistance / (closestChildDistance - neighborDistance), 0, scrollRect.content.childCount-1);
+            if(closestChildDistance - neighborDistance != 0)
+                value = Mathf.Clamp(closestElementIndex + (neighborChildIndex - closestElementIndex) * closestChildDistance / (closestChildDistance - neighborDistance), 0, scrollRect.content.childCount-1);
+            else
+                value = Mathf.Clamp(closestElementIndex, 0, (scrollRect.content.childCount-1));
+            Debug.Log(closestChildDistance - neighborDistance);
             if(!dragging && wasDragging)
             {
                 targetValue = PositionToScrollValue(closestElementPos);
@@ -188,8 +203,8 @@ public class SnapScrollbox : MonoBehaviour, IEndDragHandler, IDragHandler
     private void UpdateButtonsVisibility()
     {
         if(previousButton != null)
-            previousButton.SetActive(currentTargetIndex > 0);
+            previousButton.gameObject.SetActive(currentTargetIndex > 0);
         if(nextButton != null)
-            nextButton.SetActive(currentTargetIndex < scrollRect.content.childCount - 1);
+            nextButton.gameObject.SetActive(currentTargetIndex < scrollRect.content.childCount - 1);
     }
 }

@@ -28,6 +28,8 @@ public class SpriteAnimConfig
 
     public Sprite GetSpriteFromIndex(int index)
     {
+        if(sprites.Length == 0)
+            return null;
         return sprites[loop ? index % sprites.Length : Mathf.Min(index, sprites.Length - 1)];
     }
 

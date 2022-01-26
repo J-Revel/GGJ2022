@@ -103,6 +103,8 @@ public class AnimEditor : EditorWindow
                 }
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
+            if(selectedAnimElement.spriteAnim.sprites == null)
+                selectedAnimElement.spriteAnim.sprites = new Sprite[0];
             for(int i=0; i<selectedAnimElement.spriteAnim.sprites.Length; i++)
             {
                 Sprite newSprite = (Sprite)EditorGUILayout.ObjectField(selectedAnimElement.spriteAnim.sprites[i], typeof(Sprite), false, GUILayout.Width(70), GUILayout.Height(70));
@@ -132,8 +134,11 @@ public class AnimEditor : EditorWindow
             Vector2 maxSpriteSize = Vector2.zero;
             for(int i=0; i<spriteAnim.sprites.Length; i++)
             {
-                maxSpriteSize.x = Mathf.Max(maxSpriteSize.x, spriteAnim.sprites[i].rect.width);
-                maxSpriteSize.y = Mathf.Max(maxSpriteSize.y, spriteAnim.sprites[i].rect.height);
+                if(spriteAnim.sprites[i] != null)
+                {
+                    maxSpriteSize.x = Mathf.Max(maxSpriteSize.x, spriteAnim.sprites[i].rect.width);
+                    maxSpriteSize.y = Mathf.Max(maxSpriteSize.y, spriteAnim.sprites[i].rect.height);
+                }
             }
             
             displaySize = EditorGUILayout.Slider(displaySize, 0.01f, 10);
@@ -215,6 +220,8 @@ public class AnimEditor : EditorWindow
     
     void DrawOnGUISprite(Sprite aSprite, Vector2 position, float scale)
     {
+        if(aSprite == null)
+            return;
         Rect c = aSprite.rect;
         float spriteW = c.width;
         float spriteH = c.height;
