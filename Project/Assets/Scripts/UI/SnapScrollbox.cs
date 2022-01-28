@@ -153,7 +153,6 @@ public class SnapScrollbox : MonoBehaviour, IEndDragHandler, IDragHandler
                 value = Mathf.Clamp(closestElementIndex + (neighborChildIndex - closestElementIndex) * closestChildDistance / (closestChildDistance - neighborDistance), 0, scrollRect.content.childCount-1);
             else
                 value = Mathf.Clamp(closestElementIndex, 0, (scrollRect.content.childCount-1));
-            Debug.Log(closestChildDistance - neighborDistance);
             if(!dragging && wasDragging)
             {
                 targetValue = PositionToScrollValue(closestElementPos);
