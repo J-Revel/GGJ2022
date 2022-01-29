@@ -42,10 +42,12 @@ public class CardboardMeshGenerator : MonoBehaviour
 
         AddBoxMesh(vertices, normals, triangles, 0, leafThickness / scale.y / 2);
         AddBoxMesh(vertices, normals, triangles, 1 - leafThickness / scale.y / 2, 1);
+        mesh.subMeshCount = 2;
+        mesh.SetTriangles(triangles.ToArray(), 0);
+        triangles.Clear();
         AddDividedBoxMesh(vertices, normals, triangles, leafThickness / scale.y, 1 - leafThickness / scale.y, leafThickness / scale.y, subdivisionLength, oscilationLength);
-
+        mesh.SetTriangles(triangles.ToArray(), 1);
         mesh.vertices = vertices.ToArray();
-        mesh.triangles = triangles.ToArray();
         mesh.normals = normals.ToArray();
         mesh.RecalculateNormals();
         
