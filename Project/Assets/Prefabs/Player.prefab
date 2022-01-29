@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &239413286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239413287}
+  m_Layer: 0
+  m_Name: LeftWallDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239413287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239413286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.45, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1255832458947200877}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &821348636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 821348637}
+  m_Layer: 0
+  m_Name: RightWallDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &821348637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821348636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.45, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1255832458947200877}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &209211536464100525
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,6 +126,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1004193037315004032}
+  - {fileID: 239413287}
+  - {fileID: 821348637}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,6 +149,92 @@ MonoBehaviour:
   collider: {fileID: 1255832458947200878}
   renderer: {fileID: 1255832458947200873}
   groundDetector: {fileID: 1004193037315004032}
+  leftWallDetector: {fileID: 239413287}
+  rightWallDetector: {fileID: 821348637}
+  jumpAction:
+    m_Name: Jump
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 77d1b05d-901c-43a5-8133-ee65310169e4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 33f00048-8e61-4518-9f23-8b194a835eae
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    m_Flags: 0
+  interactionAction:
+    m_Name: Interaction
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: a6eccf48-141b-4ec4-ba2f-7a8e5662bdd4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a3b11507-9d17-4e3b-b5af-d3e7145bacee
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interaction
+      m_Flags: 0
+    m_Flags: 0
+  switchStateAction:
+    m_Name: Switch State
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 65f213a4-e12b-460e-a192-5431ae81d21c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 617d6bd8-1b0d-4c8d-8e25-bca27f55a281
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Switch State
+      m_Flags: 0
+    m_Flags: 0
+  horizontalAction:
+    m_Name: Horizontal
+    m_Type: 0
+    m_ExpectedControlType: Button
+    m_Id: 5864ef75-7bdc-4f36-aabd-d38578002e7d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: Horizontal
+      m_Id: 2ec05e08-b921-4edf-b103-8af41f05f5fe
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Horizontal
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: c4375155-9866-41b8-ad5a-2dcd516a3efd
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Horizontal
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 0e81ca14-123c-4f38-902f-3ba86ad963b5
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Horizontal
+      m_Flags: 8
+    m_Flags: 0
 --- !u!54 &1255832458947200879
 Rigidbody:
   m_ObjectHideFlags: 0
