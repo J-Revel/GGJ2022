@@ -276,6 +276,8 @@ public class Player : MonoBehaviour
                     this.isJumping = true;
                     this.currentJumpingDirection = Vector2.up;
                     this.currentIsSideJump = false;
+                    float deltaJumpForce = this.currentJumpForce / 500f;
+                    rigidbody.AddForce(currentJumpingDirection * deltaJumpForce, ForceMode.Impulse);
                     this.currentJumpingTime = 0f;
                 }
             }
@@ -289,6 +291,8 @@ public class Player : MonoBehaviour
                     this.isJumping = true;
                     this.currentJumpingDirection = (this.hasLeftWall) ? new Vector2(0.5f,1f): new Vector2(-0.5f, 1f);
                     this.currentIsSideJump = true;
+                    float deltaJumpForce = this.currentJumpForce / 500f;
+                    rigidbody.AddForce(currentJumpingDirection * deltaJumpForce, ForceMode.Impulse);
                     this.currentJumpingTime = 0f;
                 }
             }
