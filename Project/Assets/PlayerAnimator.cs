@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -21,6 +22,9 @@ public class PlayerAnimator : MonoBehaviour
     }
 
     private State state;
+    private float scaleAnimationSpeed = 3f;
+    private float scaleAnimationTime = 0f;
+
     public State SpriteState
     {
         get => state;
@@ -52,7 +56,35 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnLifeStateChanges(bool isLiving)
     {
+        this.CleanRendererAnimation();
         this.isLiving = isLiving;
         sprite.SelectAnim(GetStateId(this.isLiving, state));
+    }
+
+    private void CleanRendererAnimation()
+    {
+        this.transform.localScale = Vector3.one;
+        this.scaleAnimationTime = 0f;
+    }
+
+    private void Update()
+    {
+        if (isLiving)
+        {
+            return;
+        }
+
+        scaleAnimationTime += Time.deltaTime * scaleAnimationSpeed;
+        float scaleXAnimationValue = (1f + Mathf.Sin(scaleAnimationTime))/2f;
+        float scaleYAnimationValue = (1f + Mathf.Sin(scaleAnimationTime + 0.5f)) / 2f;
+
+        float scaleX = 0.9f + 0.15f * scaleXAnimationValue;
+        float scaleY = 0.85f + 0.25f * scaleYAnimationValue;
+        this.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+    }
+
+    private float EaseInOutSin(float x)
+    {
+        return -(Mathf.Cos(Mathf.PI * x) - 1) / 2;
     }
 }

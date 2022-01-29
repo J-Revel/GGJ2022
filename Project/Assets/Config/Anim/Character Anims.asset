@@ -21,8 +21,8 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 331fd66b1e81d43c4a256774581992f5, type: 3}
       - {fileID: 21300000, guid: d554db195804047b183068b6c866091e, type: 3}
       actionPoints: []
-      framePerSecond: 10
-      loop: 0
+      framePerSecond: 5
+      loop: 1
   - name: Walk Alive
     spriteAnim:
       sprites:
@@ -39,21 +39,21 @@ MonoBehaviour:
       - {fileID: 21300000, guid: efc33ede0ca5f4fc097d6e0a1b2573c6, type: 3}
       actionPoints: []
       framePerSecond: 10
-      loop: 1
+      loop: 0
   - name: Fall Alive
     spriteAnim:
       sprites:
       - {fileID: 21300000, guid: f08f5ea9167af403e88da3c3720ab880, type: 3}
       actionPoints: []
       framePerSecond: 24
-      loop: 1
+      loop: 0
   - name: Float Alive
     spriteAnim:
       sprites:
       - {fileID: 21300000, guid: a4ebb8079afd9457dab686dd10fcc8c0, type: 3}
       actionPoints: []
       framePerSecond: 24
-      loop: 1
+      loop: 0
   - name: Dead
     spriteAnim:
       sprites:
@@ -70,5 +70,5 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d7e852fcb3ded45a6b7cf1f052c04fe0, type: 3}
       actionPoints: []
       framePerSecond: 10
-      loop: 1
+      loop: 0
   actionPointNames: []

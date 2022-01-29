@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    private enum Facing { None, Left, Right };
+    private enum Facing { Left, Right };
     private bool isLiving = true;
     private bool isObserved = false;
-    private Facing facing = Facing.None;
+    private Facing facing = Facing.Right;
 
     [SerializeField]
     private PlayerProperties deadProperties;
@@ -25,13 +25,6 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer renderer;
-
-    [SerializeField]
-    private Transform groundDetector;
-    [SerializeField]
-    private Transform leftWallDetector;
-    [SerializeField]
-    private Transform rightWallDetector;
 
     [SerializeField]
     PlayerAnimator animator;
@@ -211,7 +204,6 @@ public class Player : MonoBehaviour
 
     private void CheckFacing()
     {
-        Facing actualFacing;
         float facingFactor;
 
         // Switch facing depending on user interaction or velocity by default.
@@ -224,30 +216,20 @@ public class Player : MonoBehaviour
             facingFactor = this.wantedTranslation;
         }
 
-        if(facingFactor > 0f)
+        if(facingFactor > 0.2f && this.facing == Facing.Left)
         {
-            actualFacing = Facing.Right;
+            this.ChangeFacing(Facing.Right);
         }
-        else if(facingFactor < 0f)
+        else if(facingFactor < -0.2f && this.facing == Facing.Right)
         {
-            actualFacing = Facing.Left;
+            this.ChangeFacing(Facing.Left);
         }
-        else
-        {
-            actualFacing = Facing.None;
-        }
-        this.TryChangeFacing(actualFacing);
     }
 
-    private bool TryChangeFacing(Facing actualFacing)
+    private void ChangeFacing(Facing actualFacing)
     {
-        if (this.facing != actualFacing)
-        {
-            this.facing = actualFacing;
-            this.renderer.flipX = (this.facing == Facing.Left);
-            return true;
-        }
-        return false;
+        this.facing = actualFacing;
+        this.renderer.flipX = (this.facing == Facing.Left);
     }
 
     private void CheckWall()
