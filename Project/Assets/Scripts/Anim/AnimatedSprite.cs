@@ -20,6 +20,8 @@ public class AnimatedSprite : MonoBehaviour
     {
         time += Time.deltaTime;
         int newFrameIndex = animList.spriteAnims[animIndex].spriteAnim.GetSpriteIndex(time);
+        if(!loopAnim)
+            newFrameIndex = Mathf.Min(newFrameIndex, animList.spriteAnims[animIndex].spriteAnim.sprites.Length - 1);
         if(newFrameIndex != frameIndex)
         {
             spriteRenderer.sprite = animList.spriteAnims[animIndex].spriteAnim.GetSpriteFromIndex(newFrameIndex);
@@ -29,11 +31,11 @@ public class AnimatedSprite : MonoBehaviour
 
     public bool isAnimationFinished { get { return animList.spriteAnims[animIndex].spriteAnim.IsAnimationFinished(time); } }
 
-    public void SelectAnim(string animName, bool loop = true)
+    public void SelectAnim(string animName, bool loop = true, bool force = false)
     {
         for(int i=0; i<animList.spriteAnims.Length; i++)
         {
-            if(animList.spriteAnims[i].name == animName && i != animIndex)
+            if(animList.spriteAnims[i].name == animName && (i != animIndex || force))
             {
                 time = 0;
                 animIndex = i;

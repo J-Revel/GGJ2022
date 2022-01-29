@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float deltaAngle = 30;
-    public float startAngle = 0;
+    public Vector3 startDirection { get { return (ProjectOnGamePlane(targetElement.position) - ProjectOnGamePlane(transform.position)).normalized; } }
     public int subdivisions = 10;
     public LayerMask layerMask;
     public bool updateMesh = false;
