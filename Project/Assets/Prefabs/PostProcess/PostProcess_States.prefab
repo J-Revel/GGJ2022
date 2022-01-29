@@ -107,6 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5182584794144894526}
+  - component: {fileID: 1546178913}
   m_Layer: 0
   m_Name: PostProcess_States
   m_TagString: Untagged
@@ -132,6 +133,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1546178913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414694062774687995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38607db90fa9245b3b2a784ae0ffd0ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aliveVolume: {fileID: 1086732611328831628}
+  deadVolume: {fileID: 1086732610663153770}
+  deadParticleContainer: {fileID: 5740495106522761437}
 --- !u!1001 &2268673110091441403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189,12 +205,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5823620300621966374, guid: d2110a7eecb83ee4e9080a42b078da8a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2110a7eecb83ee4e9080a42b078da8a, type: 3}
 --- !u!4 &3397921961734884478 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3484706567693002885, guid: d2110a7eecb83ee4e9080a42b078da8a, type: 3}
+  m_PrefabInstance: {fileID: 2268673110091441403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5740495106522761437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5823620300621966374, guid: d2110a7eecb83ee4e9080a42b078da8a, type: 3}
   m_PrefabInstance: {fileID: 2268673110091441403}
   m_PrefabAsset: {fileID: 0}
