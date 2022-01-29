@@ -12,22 +12,33 @@ public class CameraController : MonoBehaviour
     public MeshFilter meshFilter;
     public float zPosition = 0;
     public Transform targetElement;
+    public float visibility = 0;
+
+    private MeshRenderer meshRenderer;
+    private MaterialPropertyBlock propertyBlock;
     
     void Start()
     {
         meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
         if(updateMesh)
         {
             UpdateMesh();
-        }   
+        }  
+        propertyBlock = new MaterialPropertyBlock();
+        meshRenderer.GetPropertyBlock(propertyBlock);
+        propertyBlock.SetFloat("_Visibility", visibility);
+        meshRenderer.SetPropertyBlock(propertyBlock);
     }
 
     public void Update()
     {
+        propertyBlock.SetFloat("_Visibility", visibility);
+        meshRenderer.SetPropertyBlock(propertyBlock);
         if(updateMesh)
         {
             UpdateMesh();
-        }   
+        }
     }
 
     private Vector3 ProjectOnGamePlane(Vector3 pos)

@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 1255832458947200879}
   - component: {fileID: 1255832458947200873}
   - component: {fileID: 1595570151}
+  - component: {fileID: 2791496120986781354}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -195,7 +196,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 617d6bd8-1b0d-4c8d-8e25-bca27f55a281
-      m_Path: <Keyboard>/a
+      m_Path: <Keyboard>/q
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -220,7 +221,7 @@ MonoBehaviour:
       m_Flags: 4
     - m_Name: negative
       m_Id: c4375155-9866-41b8-ad5a-2dcd516a3efd
-      m_Path: <Keyboard>/q
+      m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -317,3 +318,19 @@ CapsuleCollider:
   m_Height: 0.95
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2791496120986781354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255832458947200872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae58007e121b04748bdf33d3221495f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1255832458947200873}
+  animList: {fileID: 11400000, guid: 9c387770cb69c894ea14ad59b0c93ac7, type: 2}
+  animIndex: 0
+  loopAnim: 1
