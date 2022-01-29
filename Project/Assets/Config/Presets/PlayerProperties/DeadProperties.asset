@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeadProperties
   m_EditorClassIdentifier: 
   height: 1
-  width: 0.8
+  width: 0.6
   speed: 1000
   airSpeed: 1000
   jumpForce: 900
