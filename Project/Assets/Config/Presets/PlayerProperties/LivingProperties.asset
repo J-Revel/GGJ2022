@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3000
   airSpeed: 1300
-  jumpForce: 5000
-  minJumpingTime: 0.25
+  jumpForce: 4000
+  minJumpingTime: 0.2
   maxJumpingTime: 0.4
-  sideJumpForce: 4000
+  sideJumpForce: 3000
   minSideJumpingTime: 0.25
   maxSideJumpingTime: 0.35
   gravityForce: 2400
