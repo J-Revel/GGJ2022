@@ -105,7 +105,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(horizontalAction.ReadValue<float>() + " " + horizontalAction.ReadValue<float>());
     }
 
     private void FixedUpdate()
@@ -332,7 +331,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < raycastCount; i++)
         {
             float relativeOffset = (((float)raycastCount / 2f) - i) / (float)raycastCount;
-            Vector3 offset = raycastNormal * relativeOffset;
+            Vector3 offset = raycastNormal * relativeOffset * raycastWidth;
             bool hitted = Physics.Raycast(raycastPosition + offset, raycastDirection, out hit, raycastLength, layerMask);
             Debug.DrawRay(raycastPosition + offset, raycastDirection * raycastLength, hitted ? Color.green : Color.red, 0.05f, false);
             if (hitted && hit.distance < minHitDistance)
