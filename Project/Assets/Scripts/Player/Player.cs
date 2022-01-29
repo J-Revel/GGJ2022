@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
     private enum Facing { Left, Right };
     private bool isLiving = true;
-    private bool isObserved = false;
+    public bool isObserved = false;
     private Facing facing = Facing.Right;
 
     [SerializeField]
@@ -68,6 +69,8 @@ public class Player : MonoBehaviour
     private float currentMaxJumpingTime => this.currentIsSideJump ? properties.maxSideJumpingTime : properties.maxJumpingTime;
     private float currentMinJumpingTime => this.currentIsSideJump ? properties.minSideJumpingTime : properties.minJumpingTime;
     private bool isInAir => !(this.isGrounded && !isJumping);
+
+    public UnityEvent jumpEvent;
 
     private void Start()
     {
@@ -273,7 +276,10 @@ public class Player : MonoBehaviour
                     this.currentJumpingDirection = Vector2.up;
                     this.currentIsSideJump = false;
                     this.Jump();
+                    jumpEvent.Invoke();
+
                 }
+
             }
             else if (!this.isGrounded && (this.hasLeftWall || this.hasRightWall))
             {
