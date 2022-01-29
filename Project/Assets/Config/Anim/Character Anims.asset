@@ -21,18 +21,6 @@ MonoBehaviour:
       actionPoints: []
       framePerSecond: 10
       loop: 0
-  - name: 
-    spriteAnim:
-      sprites: []
-      actionPoints: []
-      framePerSecond: 24
-      loop: 1
-  - name: 
-    spriteAnim:
-      sprites: []
-      actionPoints: []
-      framePerSecond: 24
-      loop: 1
   - name: Walk Alive
     spriteAnim:
       sprites:

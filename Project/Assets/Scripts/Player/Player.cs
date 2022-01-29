@@ -105,7 +105,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(horizontalAction.ReadValue<float>() + " " + horizontalAction.ReadValue<float>());
     }
 
     private void FixedUpdate()
