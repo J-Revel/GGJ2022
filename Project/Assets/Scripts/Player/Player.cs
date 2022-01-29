@@ -39,12 +39,39 @@ public class Player : MonoBehaviour
     float raycastLength = 0.2f;
     RaycastHit hit;
     Vector3 raycastDirection;
+    Vector3 raycastNormal;
+    float raycastWidth;
 
     //Inputs
     public InputAction jumpAction;
     public InputAction interactionAction;
     public InputAction switchStateAction;
     public InputAction horizontalAction;
+
+    // Logic Input 
+    private bool wantedJump;
+    private bool wantedLongJump;
+    private bool wantedInteraction;
+    private bool wantedSwitch;
+    private float wantedTranslation;
+
+    //Logic State
+    private bool isGrounded;
+    private float timeSinceGrounded;
+    private bool hasLeftWall;
+    private bool hasRightWall;
+    private bool isJumping;
+    private bool isClimbing;
+
+    private Vector2 currentJumpingDirection;
+    private bool currentIsSideJump;
+    private double currentJumpingTime;
+
+    private float currentJumpForce => this.currentIsSideJump ? properties.sideJumpForce : properties.jumpForce;
+    private float currentJumpImpulsion => this.currentIsSideJump ? properties.sideJumpImpulsion : properties.jumpImpulsion;
+    private float currentMaxJumpingTime => this.currentIsSideJump ? properties.maxSideJumpingTime : properties.maxJumpingTime;
+    private float currentMinJumpingTime => this.currentIsSideJump ? properties.minSideJumpingTime : properties.minJumpingTime;
+    private bool isInAir => !(this.isGrounded && !isJumping);
 
     private void Start()
     {
@@ -75,29 +102,6 @@ public class Player : MonoBehaviour
         switchStateAction.Enable();
         horizontalAction.Enable();
     }
-
-    // Logic Input 
-    private bool wantedJump;
-    private bool wantedLongJump;
-    private bool wantedInteraction;
-    private bool wantedSwitch;
-    private float wantedTranslation;
-
-    //Logic State
-    private bool isGrounded;
-    private bool hasLeftWall;
-    private bool hasRightWall;
-    private bool isJumping;
-    private bool isClimbing;
-
-    private Vector2 currentJumpingDirection;
-    private bool currentIsSideJump;
-    private double currentJumpingTime;
-
-    private float currentJumpForce => this.currentIsSideJump ? properties.sideJumpForce : properties.jumpForce;
-    private float currentMaxJumpingTime => this.currentIsSideJump ? properties.maxSideJumpingTime : properties.maxJumpingTime;
-    private float currentMinJumpingTime => this.currentIsSideJump ? properties.minSideJumpingTime : properties.minJumpingTime;
-    private bool isInAir => !(this.isGrounded && !isJumping);
 
     private void Update()
     {
@@ -217,40 +221,20 @@ public class Player : MonoBehaviour
 
     private void CheckWall()
     {
-        // Left Wall detection
-        raycastPosition = leftWallDetector.position;
-        raycastDirection = Vector3.left;
-        float minHitDistance = raycastLength;
+        raycastNormal = Vector3.up;
+        raycastWidth = properties.height * 1.2f;
 
-        //TODO Do multiple raycast to enhance precision
-        for (int i = 0; i < 1; i++)
-        {
-            bool hitted = Physics.Raycast(raycastPosition, raycastDirection, out hit, raycastLength, layerMask);
-            Debug.DrawRay(raycastPosition, raycastDirection * raycastLength, hitted ? Color.green : Color.red, 0.2f, false);
-            if (hitted && hit.distance < minHitDistance)
-            {
-                minHitDistance = hit.distance;
-            }
-        }
+        // Left Wall detection
+        raycastPosition = this.transform.position + Vector3.left * properties.width * 0.4f; ;
+        raycastDirection = Vector3.left;
+        this.RaycastGroundable(out float minHitDistance);
 
         this.hasLeftWall = minHitDistance < raycastLength;
 
         // Right Wall detection
-        raycastPosition = rightWallDetector.position;
+        raycastPosition = this.transform.position + Vector3.right * properties.width * 0.4f; ;
         raycastDirection = Vector3.right;
-
-        minHitDistance = raycastLength;
-
-        //TODO Do multiple raycast to enhance precision
-        for (int i = 0; i < 1; i++)
-        {
-            bool hitted = Physics.Raycast(raycastPosition, raycastDirection, out hit, raycastLength, layerMask);
-            Debug.DrawRay(raycastPosition, raycastDirection * raycastLength, hitted ? Color.green : Color.red, 0.2f, false);
-            if (hitted && hit.distance < minHitDistance)
-            {
-                minHitDistance = hit.distance;
-            }
-        }
+        this.RaycastGroundable(out minHitDistance);
 
         this.hasRightWall = minHitDistance < raycastLength;
 
@@ -262,12 +246,12 @@ public class Player : MonoBehaviour
     {
         if (!this.isJumping)
         {
-            if (!this.isGrounded && !this.isJumping && !(this.hasLeftWall || this.hasRightWall)) 
+            if (!this.isGrounded && timeSinceGrounded > properties.coyoteTime && !this.isJumping && !(this.hasLeftWall || this.hasRightWall)) 
             {
                 // Player has finished jumping and is falling
                 // Player interactions should not not interpreted
             }
-            else if(this.isGrounded)
+            else if(this.isGrounded || timeSinceGrounded < properties.coyoteTime)
             {
                 // Player is not jumping and is grounded
                 // Player interactions can trigger a jump
@@ -277,8 +261,7 @@ public class Player : MonoBehaviour
                     this.isJumping = true;
                     this.currentJumpingDirection = Vector2.up;
                     this.currentIsSideJump = false;
-                    float deltaJumpForce = this.currentJumpForce / 500f;
-                    rigidbody.AddForce(currentJumpingDirection * deltaJumpForce, ForceMode.Impulse);
+                    rigidbody.AddForce(currentJumpingDirection * currentJumpImpulsion, ForceMode.Impulse);
                     this.currentJumpingTime = 0f;
                 }
             }
@@ -292,8 +275,7 @@ public class Player : MonoBehaviour
                     this.isJumping = true;
                     this.currentJumpingDirection = (this.hasLeftWall) ? new Vector2(0.5f,1f): new Vector2(-0.5f, 1f);
                     this.currentIsSideJump = true;
-                    float deltaJumpForce = this.currentJumpForce / 500f;
-                    rigidbody.AddForce(currentJumpingDirection * deltaJumpForce, ForceMode.Impulse);
+                    rigidbody.AddForce(currentJumpingDirection * currentJumpImpulsion, ForceMode.Impulse);
                     this.currentJumpingTime = 0f;
                 }
             }
@@ -325,22 +307,40 @@ public class Player : MonoBehaviour
 
     private void CheckGround()
     {
-        raycastPosition = groundDetector.position;
+        raycastPosition = this.transform.position + Vector3.down * properties.height * 0.4f;
         raycastDirection = Vector3.down;
+        raycastNormal = Vector3.left;
+        raycastWidth = properties.width * 1.2f;
+        this.RaycastGroundable(out float minHitDistance);
 
-        float minHitDistance = raycastLength;
-
-        //TODO Do multiple raycast to enhance precision
-        for (int i = 0; i < 1; i++)
+        this.isGrounded = minHitDistance < raycastLength;
+        if (isGrounded)
         {
-            bool hitted = Physics.Raycast(raycastPosition, raycastDirection, out hit, raycastLength, layerMask);
-            Debug.DrawRay(raycastPosition, raycastDirection * raycastLength, hitted ? Color.green : Color.red, 0.2f, false);
+            timeSinceGrounded = 0f;
+        }
+        else
+        {
+            timeSinceGrounded += Time.deltaTime;
+        }
+
+    }
+
+    private bool RaycastGroundable(out float minHitDistance, int raycastCount = 11)
+    {
+        minHitDistance = raycastLength;
+
+        for (int i = 0; i < raycastCount; i++)
+        {
+            float relativeOffset = (((float)raycastCount / 2f) - i) / (float)raycastCount;
+            Vector3 offset = raycastNormal * relativeOffset;
+            bool hitted = Physics.Raycast(raycastPosition + offset, raycastDirection, out hit, raycastLength, layerMask);
+            Debug.DrawRay(raycastPosition + offset, raycastDirection * raycastLength, hitted ? Color.green : Color.red, 0.05f, false);
             if (hitted && hit.distance < minHitDistance)
             {
                 minHitDistance = hit.distance;
             }
         }
-        
-        this.isGrounded = minHitDistance < raycastLength;
+
+        return minHitDistance < raycastLength;
     }
 }

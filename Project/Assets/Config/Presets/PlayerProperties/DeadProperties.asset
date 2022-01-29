@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a694b70809741f38931128d47fa95c, type: 3}
   m_Name: DeadProperties
   m_EditorClassIdentifier: 
+  height: 1
+  width: 0.8
   speed: 1000
   airSpeed: 1000
-  jumpForce: 400
-  minJumpingTime: 0.5
-  maxJumpingTime: 1.2
+  jumpForce: 900
+  jumpImpulsion: 10
+  minJumpingTime: 0.2
+  maxJumpingTime: 3
   sideJumpForce: 0
+  sideJumpImpulsion: 0
   minSideJumpingTime: 0
   maxSideJumpingTime: 0
-  gravityForce: 250
+  gravityForce: 1000
   frictionGravityRatio: 0
+  coyoteTime: 0.15
