@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 1
   width: 0.8
-  speed: 3000
-  airSpeed: 1300
+  speed: 2000
+  airSpeed: 1000
   jumpForce: 4000
   jumpImpulsion: 10
   minJumpingTime: 0.2
