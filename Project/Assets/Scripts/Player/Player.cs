@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     private enum Facing { None, Left, Right };
-    private bool isDead;
-    private bool isObserved;
+    private bool isLiving = true;
+    private bool isObserved = false;
     private Facing facing = Facing.None;
 
     [SerializeField]
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerProperties livingProperties;
 
-    private PlayerProperties properties => isDead ? deadProperties : livingProperties;
+    private PlayerProperties properties => !isLiving ? deadProperties : livingProperties;
 
     [SerializeField]
     private Rigidbody rigidbody;
@@ -144,9 +144,10 @@ public class Player : MonoBehaviour
         {
             if (!isObserved)
             {
-                this.isDead = !this.isDead;
+                this.isLiving = !this.isLiving;
+                LivingStateManager.TriggerLifeChanges(this.isLiving);
                 //TODO Change visual state according to isDead value
-                this.gameObject.GetComponent<SpriteRenderer>().color = this.isDead ? Color.black : Color.white;
+                this.gameObject.GetComponent<SpriteRenderer>().color = !this.isLiving ? Color.black : Color.white;
             }
             else
             {
