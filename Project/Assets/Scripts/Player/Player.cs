@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        //Visual update according to state
         if (this.isGrounded)
         {
             if(this.rigidbody.velocity.magnitude > 1f)
@@ -125,6 +126,10 @@ public class Player : MonoBehaviour
             if(speed > 0.1f)
             {
                 animator.SpriteState = PlayerAnimator.State.Jump;
+            }
+            else if (this.isClimbing)
+            {
+                animator.SpriteState = PlayerAnimator.State.Wall;
             }
             else if(speed < 0.1f)
             {
@@ -179,8 +184,6 @@ public class Player : MonoBehaviour
             {
                 this.isLiving = !this.isLiving;
                 LivingStateManager.TriggerLifeChanges(this.isLiving);
-                //TODO Change visual state according to isDead value
-                this.gameObject.GetComponent<SpriteRenderer>().color = !this.isLiving ? Color.black : Color.white;
             }
             else
             {

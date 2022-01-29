@@ -1963,26 +1963,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 239413286, guid: 609ada3836a6c4f7cbcd261d25031831, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 821348636, guid: 609ada3836a6c4f7cbcd261d25031831, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 209211536464100525, guid: 609ada3836a6c4f7cbcd261d25031831, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 1255832458947200872, guid: 609ada3836a6c4f7cbcd261d25031831, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1255832458947200872, guid: 609ada3836a6c4f7cbcd261d25031831, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
+    - target: {fileID: 1255832458947200873, guid: 609ada3836a6c4f7cbcd261d25031831, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a226cd5cd210b4b6f84225c19e78dad4, type: 3}
     - target: {fileID: 1255832458947200877, guid: 609ada3836a6c4f7cbcd261d25031831, type: 3}
       propertyPath: m_RootOrder
       value: 2

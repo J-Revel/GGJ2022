@@ -16,40 +16,59 @@ MonoBehaviour:
   - name: Idle Alive
     spriteAnim:
       sprites:
-      - {fileID: 21300000, guid: c4dee7e9362b0b140a9affa317b8c225, type: 3}
-      - {fileID: 21300000, guid: 9a15b38e17adab241b47402589080f55, type: 3}
+      - {fileID: 21300000, guid: a226cd5cd210b4b6f84225c19e78dad4, type: 3}
+      - {fileID: 21300000, guid: 5b749dc005c55478ea1fa1ab8e4f1d46, type: 3}
+      - {fileID: 21300000, guid: 331fd66b1e81d43c4a256774581992f5, type: 3}
+      - {fileID: 21300000, guid: d554db195804047b183068b6c866091e, type: 3}
       actionPoints: []
       framePerSecond: 10
       loop: 0
   - name: Walk Alive
     spriteAnim:
       sprites:
-      - {fileID: 21300000, guid: 8c34934919119d04888d55a9b1479a48, type: 3}
-      - {fileID: 21300000, guid: 91cfb65d07c45ad44bd5c62ddf58d4ea, type: 3}
-      - {fileID: 21300000, guid: e0f18af530b75494184998535d827d12, type: 3}
-      - {fileID: 21300000, guid: 91cfb65d07c45ad44bd5c62ddf58d4ea, type: 3}
+      - {fileID: 21300000, guid: 74aae8e75aade49c1a4ea8de832dc443, type: 3}
+      - {fileID: 21300000, guid: d850b9c21ad45416da9c7f9c6c7229aa, type: 3}
+      - {fileID: 21300000, guid: 9ca67545ed7f040e988ad39a8320ba8b, type: 3}
+      - {fileID: 21300000, guid: 0320548a2ac7f4515818e766c51c31eb, type: 3}
       actionPoints: []
       framePerSecond: 10
       loop: 1
   - name: Jump Alive
     spriteAnim:
       sprites:
-      - {fileID: 21300000, guid: 4e726ab42dc3a73488a39738fd6bda91, type: 3}
+      - {fileID: 21300000, guid: efc33ede0ca5f4fc097d6e0a1b2573c6, type: 3}
       actionPoints: []
       framePerSecond: 10
       loop: 1
   - name: Fall Alive
     spriteAnim:
       sprites:
-      - {fileID: 21300000, guid: 99b3083c56e0a624bb32275cddb76f3f, type: 3}
+      - {fileID: 21300000, guid: f08f5ea9167af403e88da3c3720ab880, type: 3}
       actionPoints: []
       framePerSecond: 24
       loop: 1
   - name: Float Alive
     spriteAnim:
       sprites:
-      - {fileID: 21300000, guid: 5dd33679fd92c0c4e9411950478e0ef6, type: 3}
+      - {fileID: 21300000, guid: a4ebb8079afd9457dab686dd10fcc8c0, type: 3}
       actionPoints: []
       framePerSecond: 24
+      loop: 1
+  - name: Dead
+    spriteAnim:
+      sprites:
+      - {fileID: 21300000, guid: f42e3140810fc4178928ac8b3df56cb9, type: 3}
+      - {fileID: 21300000, guid: 16d3558d2957c4cf1853d79bba33d6fe, type: 3}
+      - {fileID: 21300000, guid: 7db0671b3ec8f4f66a65d8c057aec302, type: 3}
+      - {fileID: 21300000, guid: 89886e77a814a4a038e5eaf228f34400, type: 3}
+      actionPoints: []
+      framePerSecond: 10
+      loop: 1
+  - name: Wall Alive
+    spriteAnim:
+      sprites:
+      - {fileID: 21300000, guid: d7e852fcb3ded45a6b7cf1f052c04fe0, type: 3}
+      actionPoints: []
+      framePerSecond: 10
       loop: 1
   actionPointNames: []

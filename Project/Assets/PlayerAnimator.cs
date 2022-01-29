@@ -5,12 +5,19 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     private AnimatedSprite sprite;
 
-    public enum State {Idle, Walk, Jump, Float, Fall}
+    public enum State {Idle, Walk, Jump, Float, Fall, Wall}
     private bool isLiving = true;
 
     private string GetStateId(bool isAlive, State state)
     {
-        return state.ToString() + (isAlive ? " Alive" : " Dead");
+        if(isAlive)
+        {
+            return  $"{state} Alive";
+        }
+        else
+        {
+            return "Dead";
+        }
     }
 
     private State state;
@@ -29,8 +36,7 @@ public class PlayerAnimator : MonoBehaviour
     private void SwitchState(State state)
     {
         this.state = state;
-        Debug.Log(GetStateId(isLiving, state));
-        sprite.SelectAnim(GetStateId(isLiving,state));
+        if(isLiving) sprite.SelectAnim(GetStateId(isLiving,state));
     }
 
     // Start is called before the first frame update
