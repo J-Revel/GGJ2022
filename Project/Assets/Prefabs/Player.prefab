@@ -104,8 +104,8 @@ GameObject:
   - component: {fileID: 1255832458947200877}
   - component: {fileID: 1255832458947200876}
   - component: {fileID: 1255832458947200879}
-  - component: {fileID: 1255832458947200878}
   - component: {fileID: 1255832458947200873}
+  - component: {fileID: 1595570151}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -146,7 +146,7 @@ MonoBehaviour:
   deadProperties: {fileID: 11400000, guid: 2e221cc07b782493595a04b47fbdb5fe, type: 2}
   livingProperties: {fileID: 11400000, guid: f4bd259334c074cf2aff809bb3a8d5da, type: 2}
   rigidbody: {fileID: 1255832458947200879}
-  collider: {fileID: 1255832458947200878}
+  collider: {fileID: 1595570151}
   renderer: {fileID: 1255832458947200873}
   groundDetector: {fileID: 1004193037315004032}
   leftWallDetector: {fileID: 239413287}
@@ -251,19 +251,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!65 &1255832458947200878
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255832458947200872}
-  m_Material: {fileID: 13400000, guid: 0231a971af02d43ad976c8577ef6e564, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &1255832458947200873
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -316,3 +303,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!136 &1595570151
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255832458947200872}
+  m_Material: {fileID: 13400000, guid: 0231a971af02d43ad976c8577ef6e564, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 0.95
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

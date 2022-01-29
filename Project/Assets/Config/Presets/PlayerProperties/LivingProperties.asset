@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a694b70809741f38931128d47fa95c, type: 3}
   m_Name: LivingProperties
   m_EditorClassIdentifier: 
-  speed: 3000
-  airSpeed: 1300
+  height: 1
+  width: 0.8
+  speed: 2000
+  airSpeed: 1000
   jumpForce: 4000
+  jumpImpulsion: 10
   minJumpingTime: 0.2
   maxJumpingTime: 0.4
   sideJumpForce: 3000
+  sideJumpImpulsion: 8
   minSideJumpingTime: 0.25
   maxSideJumpingTime: 0.35
   gravityForce: 2400
   frictionGravityRatio: 0.8
+  coyoteTime: 0.15
