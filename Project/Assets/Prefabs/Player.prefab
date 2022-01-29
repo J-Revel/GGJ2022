@@ -196,7 +196,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 617d6bd8-1b0d-4c8d-8e25-bca27f55a281
-      m_Path: <Keyboard>/a
+      m_Path: <Keyboard>/q
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -221,7 +221,7 @@ MonoBehaviour:
       m_Flags: 4
     - m_Name: negative
       m_Id: c4375155-9866-41b8-ad5a-2dcd516a3efd
-      m_Path: <Keyboard>/q
+      m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
       m_Groups: 
