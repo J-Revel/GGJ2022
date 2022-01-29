@@ -45,12 +45,14 @@ public class CameraController : MonoBehaviour
         Vector3 scale = transform.lossyScale;
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
+        List<Vector2> uvs = new List<Vector2>();
 
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = ProjectOnGamePlane(startPosition);
         vertices.Add(targetPosition - transform.position);
+        uvs.Add(new Vector2(0, 0));
 
-        for(int i=0; i<subdivisions; i++)
+        for(int i=0; i<=subdivisions; i++)
         {
             float angle = ((float)i / subdivisions - 0.5f) * deltaAngle;
             RaycastHit hit;
@@ -61,6 +63,8 @@ public class CameraController : MonoBehaviour
                 target = hit.point;
             }
             vertices.Add(target - transform.position);
+            float ratio = (float)i / subdivisions;
+            uvs.Add(new Vector2(ratio, 1));
             if(i > 0)
             {
                 triangles.Add(0);
@@ -71,6 +75,7 @@ public class CameraController : MonoBehaviour
         
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
+        mesh.uv = uvs.ToArray();
         mesh.RecalculateNormals();
         
         meshFilter.mesh = mesh;
