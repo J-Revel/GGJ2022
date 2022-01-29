@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform rightWallDetector;
 
+    [SerializeField]
+    PlayerAnimator animator;
+
     //Raycast Cache
     private int layerMask;
     Vector3 raycastPosition;
@@ -105,6 +108,33 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (this.isGrounded)
+        {
+            if(this.rigidbody.velocity.magnitude > 1f)
+            {
+                animator.SpriteState = PlayerAnimator.State.Walk;
+            }
+            else
+            {
+                animator.SpriteState = PlayerAnimator.State.Idle;
+            }
+        }
+        else
+        {
+            float speed = rigidbody.velocity.y;
+            if(speed > 0.1f)
+            {
+                animator.SpriteState = PlayerAnimator.State.Jump;
+            }
+            else if(speed < 0.1f)
+            {
+                animator.SpriteState = PlayerAnimator.State.Fall;
+            }
+            else
+            {
+                animator.SpriteState = PlayerAnimator.State.Float;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -158,7 +188,6 @@ public class Player : MonoBehaviour
             }
             this.wantedSwitch = false;
         }
-
     }
 
     private bool CheckObserved()
@@ -212,7 +241,7 @@ public class Player : MonoBehaviour
         if (this.facing != actualFacing)
         {
             this.facing = actualFacing;
-            //TODO Do Sprite Changes
+            this.renderer.flipX = (this.facing == Facing.Left);
             return true;
         }
         return false;
@@ -256,12 +285,9 @@ public class Player : MonoBehaviour
                 // Player interactions can trigger a jump
                 if (this.wantedJump)
                 {
-                    this.wantedJump = false;
-                    this.isJumping = true;
                     this.currentJumpingDirection = Vector2.up;
                     this.currentIsSideJump = false;
-                    rigidbody.AddForce(currentJumpingDirection * currentJumpImpulsion, ForceMode.Impulse);
-                    this.currentJumpingTime = 0f;
+                    this.Jump();
                 }
             }
             else if (!this.isGrounded && (this.hasLeftWall || this.hasRightWall))
@@ -270,12 +296,9 @@ public class Player : MonoBehaviour
                 // Player interactions can trigger a side jump
                 if (this.wantedJump)
                 {
-                    this.wantedJump = false;
-                    this.isJumping = true;
                     this.currentJumpingDirection = (this.hasLeftWall) ? new Vector2(0.5f,1f): new Vector2(-0.5f, 1f);
                     this.currentIsSideJump = true;
-                    rigidbody.AddForce(currentJumpingDirection * currentJumpImpulsion, ForceMode.Impulse);
-                    this.currentJumpingTime = 0f;
+                    this.Jump();
                 }
             }
         }
@@ -290,18 +313,15 @@ public class Player : MonoBehaviour
                 this.wantedLongJump = false;
             }
         }
-        if (this.isGrounded && !this.isJumping) // The player is grounded and not jumping yet, check input
-        {
+    }
 
-        }
-        else if (!this.isGrounded && !this.isJumping) // Player has finished the jump and is falling
-        {
-            // Wait 
-        }
-        else
-        {
-
-        }
+    private void Jump()
+    {
+        this.wantedJump = false;
+        this.isJumping = true;
+        rigidbody.AddForce(currentJumpingDirection * currentJumpImpulsion, ForceMode.Impulse);
+        this.currentJumpingTime = 0f;
+        animator.SpriteState = PlayerAnimator.State.Jump;
     }
 
     private void CheckGround()
@@ -321,7 +341,6 @@ public class Player : MonoBehaviour
         {
             timeSinceGrounded += Time.deltaTime;
         }
-
     }
 
     private bool RaycastGroundable(out float minHitDistance, int raycastCount = 11)
