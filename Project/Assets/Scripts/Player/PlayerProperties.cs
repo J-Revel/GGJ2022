@@ -5,7 +5,7 @@ public class PlayerProperties : ScriptableObject
 {
     [HeaderAttribute("LogicSize")]
     public float height = 1f;
-    public float width = 0.8f;
+    public float width = 0.3f;
 
     [HeaderAttribute("Speeds")]
     public float speed = 3000f;

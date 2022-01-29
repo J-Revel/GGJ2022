@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class AnimatedSprite : MonoBehaviour
     void Start()
     {
         
+    }
+
+    internal bool SelectAnim(object p)
+    {
+        throw new NotImplementedException();
     }
 
     void Update()
