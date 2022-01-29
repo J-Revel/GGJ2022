@@ -15,6 +15,10 @@ MonoBehaviour:
   speed: 3000
   airSpeed: 1300
   jumpForce: 5000
-  gravityForce: 2400
   minJumpingTime: 0.25
-  maxJumpingTime: 0.45
+  maxJumpingTime: 0.4
+  sideJumpForce: 4000
+  minSideJumpingTime: 0.25
+  maxSideJumpingTime: 0.35
+  gravityForce: 2400
+  frictionGravityRatio: 0.8
