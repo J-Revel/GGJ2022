@@ -686,6 +686,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1217465329}
     m_Modifications:
+    - target: {fileID: 2652472233944663972, guid: e6cbfb0d69078ed4789ac7ed3480ff51, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2652472233944663974, guid: e6cbfb0d69078ed4789ac7ed3480ff51, type: 3}
       propertyPath: loopAnim
       value: 1
