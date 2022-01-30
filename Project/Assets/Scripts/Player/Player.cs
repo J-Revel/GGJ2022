@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
     private enum Facing { Left, Right };
     private bool permaDead = false;
     private bool isLiving = true;
@@ -99,6 +100,12 @@ public class Player : MonoBehaviour
 
     public GameObject[] livingElements;
     public GameObject[] deadElements;
+    public float riskAnimRatio { get { return this.permaDeadTime / properties.permaTime; }}
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -377,14 +384,23 @@ public class Player : MonoBehaviour
 
     private void CheckPermaDie()
     {
-        if (!isLiving && isObserved)
+        if (!isLiving && isObserved && !this.permaDead)
         {
             this.permaDeadTime += Time.deltaTime;
             this.animator.UpdatePermaRisk(true, this.permaDeadTime / properties.permaTime);
         }
+        else
+        {
+            this.permaDeadTime -= Time.deltaTime;
+            if(permaDeadTime < 0)
+            {
+                permaDeadTime = 0;
+            }
+        }
 
         if (permaDeadTime > properties.permaTime)
         {
+            this.permaDeadTime = 0;
             PermaDie();
         }
     }
