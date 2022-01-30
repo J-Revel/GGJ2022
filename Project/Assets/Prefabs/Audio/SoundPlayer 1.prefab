@@ -601,7 +601,7 @@ MonoBehaviour:
   spawnAtStart: 0
   minPitch: 0.8
   maxPitch: 1.2
-  minIntensity: 1
+  minIntensity: 0
   maxIntensity: 1
 --- !u!114 &8287098900695965679
 MonoBehaviour:
