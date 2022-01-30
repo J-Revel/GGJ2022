@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerProperties livingProperties;
 
+    [SerializeField]
+    private SoundPlayer soundPlayer;
+
     private PlayerProperties properties => !isLiving ? deadProperties : livingProperties;
 
     [SerializeField]
@@ -92,8 +95,6 @@ public class Player : MonoBehaviour
     private float currentMinJumpingTime => this.currentIsSideJump ? properties.minSideJumpingTime : properties.minJumpingTime;
     private bool isInAir => !(this.isGrounded && !isJumping);
 
-    public UnityEvent jumpEvent;
-
     public GameObject[] livingElements;
     public GameObject[] deadElements;
 
@@ -137,9 +138,10 @@ public class Player : MonoBehaviour
         //Visual update according to state
         if (this.isGrounded)
         {
-            if(this.rigidbody.velocity.magnitude > 1f)
+            if(Mathf.Abs(this.rigidbody.velocity.x) > 1f)
             {
                 animator.SpriteState = PlayerAnimator.State.Walk;
+                soundPlayer.WalkEvent?.Invoke(Mathf.Abs(this.rigidbody.velocity.x) / 5f);
             }
             else
             {
@@ -183,7 +185,6 @@ public class Player : MonoBehaviour
         this.CheckFacing();
         this.CheckGround();
         this.CheckWall();
-        this.CheckObserved();
 
         //Try user interactions
         this.TrySwitch();
@@ -215,6 +216,7 @@ public class Player : MonoBehaviour
             {
                 this.isLiving = !this.isLiving;
                 LivingStateManager.TriggerLifeChanges(this.isLiving);
+
                 for(int i=0; i<livingElements.Length; i++)
                 {
                     livingElements[i].SetActive(this.isLiving);
@@ -223,20 +225,15 @@ public class Player : MonoBehaviour
                 {
                     deadElements[i].SetActive(!this.isLiving);
                 }
+                soundPlayer.SwitchSoundEvent?.Invoke();
             }
             else
             {
-                //TODO Add impossible state switch feedback
+                animator.DisplayCantSwitchFeedback();
+                soundPlayer.CannotSwitchSoundEvent?.Invoke();
             }
             this.wantedSwitch = false;
         }
-    }
-
-    private bool CheckObserved()
-    {
-        //TODO change this.isObserved state
-        //TODO change sprite
-        return false;
     }
 
     private void CheckFacing()
@@ -310,7 +307,7 @@ public class Player : MonoBehaviour
                     this.currentJumpingDirection = Vector2.up;
                     this.currentIsSideJump = false;
                     this.Jump();
-                    jumpEvent.Invoke();
+                    soundPlayer.JumpSoundEvent.Invoke();
 
                 }
 
@@ -323,6 +320,7 @@ public class Player : MonoBehaviour
                 {
                     this.currentJumpingDirection = (this.hasLeftWall) ? new Vector2(0.5f,1f): new Vector2(-0.5f, 1f);
                     this.currentIsSideJump = true;
+                    soundPlayer.WallJumpSoundEvent.Invoke();
                     this.Jump();
                 }
             }
@@ -357,7 +355,14 @@ public class Player : MonoBehaviour
         raycastWidth = properties.width * 1.2f;
         this.RaycastGroundable(out float minHitDistance);
 
-        this.isGrounded = minHitDistance < raycastLength;
+        bool groundDetected = minHitDistance < raycastLength;
+
+        if( groundDetected && !this.isGrounded)
+        {
+            soundPlayer.GroundSoundEvent?.Invoke();
+        }
+
+        this.isGrounded = groundDetected;
         if (isGrounded)
         {
             timeSinceGrounded = 0f;
