@@ -1,4 +1,12 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
+
+[Serializable]
+public class SwitchEvent : UnityEvent<bool>
+{
+
+}
 
 public class EndDoor : MonoBehaviour, IMechactivable
 {
@@ -7,6 +15,9 @@ public class EndDoor : MonoBehaviour, IMechactivable
 
     private float transitionDuration = 0.5f;
     private float transitionValue;
+
+    [SerializeField]
+    private SwitchEvent OnSwitchStateEvent;
 
     private float rotationActivatedValue = 140f;
 
@@ -55,5 +66,6 @@ public class EndDoor : MonoBehaviour, IMechactivable
     public void SwitchState(bool activated)
     {
         this.activated = activated;
+        OnSwitchStateEvent?.Invoke(activated);
     }
 }
