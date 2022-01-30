@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -56,8 +56,8 @@ public class PlayerAnimator : MonoBehaviour
     public void TriggerPermaDeath()
     {
         permaDeath = true;
-        sprite.SelectAnim("Permanent Death");
     }
+
 
     public void Awake()
     {
