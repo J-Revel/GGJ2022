@@ -95,7 +95,7 @@ BoxCollider:
   m_GameObject: {fileID: 6732022356079577469}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.2959175, y: 2.0610108, z: 0.090324864}
   m_Center: {x: -0.49928176, y: 0, z: -0.023845842}
@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 3536109768857747350}
   - component: {fileID: 6548704489720754753}
   - component: {fileID: 459184003382437519}
-  - component: {fileID: 1195959388}
   - component: {fileID: 1195959387}
   m_Layer: 0
   m_Name: Cardboard_DoorFrame_01
@@ -185,19 +184,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1195959388
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7126518159324897636}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1.8192637, y: 0.2475853, z: 0.09321167}
-  m_Center: {x: -7.9905477e-10, y: -0.92350626, z: 0.020075414}
 --- !u!65 &1195959387
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -209,8 +195,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8192637, y: 0.2475853, z: 0.09321167}
-  m_Center: {x: -7.9905477e-10, y: 0.94, z: 0.020075414}
+  m_Size: {x: 3.0623574, y: 0.2475853, z: 3.1578865}
+  m_Center: {x: -0.62154716, y: 0.94000006, z: -1.5122657}
 --- !u!1 &8720208051813498205
 GameObject:
   m_ObjectHideFlags: 0

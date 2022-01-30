@@ -232,6 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4952386591004139439}
   - component: {fileID: 928935279517196554}
+  - component: {fileID: 1435377899780968926}
   m_Layer: 0
   m_Name: Volume Danger
   m_TagString: Untagged
@@ -271,6 +272,18 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: cbfe3ea023b97eb4598b08a7c6735c02, type: 2}
+--- !u!114 &1435377899780968926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808366149839496301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1c6c3c4d2da324c81c0589016b9ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &150382132760043338
 PrefabInstance:
   m_ObjectHideFlags: 0
