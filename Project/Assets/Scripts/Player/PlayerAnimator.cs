@@ -11,19 +11,6 @@ public class PlayerAnimator : MonoBehaviour
     private bool isLiving = true;
     private bool permaDeath;
 
-    /*
-    [SerializeField]
-    public UnityEvent jumpSoundEvent;
-    [SerializeField]
-    public UnityEvent livingSoundEvent;
-    [SerializeField]
-    public UnityEvent deadSoundEvent;
-    [SerializeField]
-    public UnityEvent wallSoundEvent;
-    [SerializeField]
-    public UnityEvent groundSoundEvent;
-    */
-
     private string GetStateId(bool isAlive, State state)
     {
         if(isAlive)
@@ -119,5 +106,10 @@ public class PlayerAnimator : MonoBehaviour
         }
 
         RendererAnimation();
+    }
+
+    public void DisplayCantSwitchFeedback()
+    {
+        Debug.Log("I CANT SWITCH ONO");
     }
 }
