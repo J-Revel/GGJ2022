@@ -9,8 +9,7 @@ public class DestroyAfterSound : MonoBehaviour
     void Start()
     {
         source = GetComponent<AudioSource>();
-        if(source.clip != null)
-            time = source.clip.length;
+        time = source.clip.length;
     }
 
     void Update()
