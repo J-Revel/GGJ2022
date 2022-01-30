@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -14,13 +15,19 @@ public class LevelManager : MonoBehaviour
 
     private CanvasGroup canvasGroup;
 
+    private UnityEvent OnNextLevelEvent;
+
+    private UnityEvent OnReloadLevelEvent;
+
+    private UnityEvent OnStartLevelEvent;
+
     private float transitionTime;
     private float transitionDuration = 1.5f;
     private bool isTransitionning;
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Destroy(this.gameObject);
         }
@@ -33,6 +40,8 @@ public class LevelManager : MonoBehaviour
             transitionTime = transitionDuration;
             reloadAction.Enable();
         }
+
+        instance.OnStartLevelEvent?.Invoke();
     }
 
     // Update is called once per frame
@@ -40,6 +49,7 @@ public class LevelManager : MonoBehaviour
     {
         if (reloadAction.ReadValue<float>() == 1f && ! isTransitionning)
         {
+            OnReloadLevelEvent?.Invoke();
             StartTransition(levelID);
         }
 
@@ -77,6 +87,7 @@ public class LevelManager : MonoBehaviour
 
     public static void StartTransitionToNextScene()
     {
+        instance.OnNextLevelEvent?.Invoke();
         StartTransitionToScene(instance.levelID + 1);
     }
 
