@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 8555918943818568770}
   - component: {fileID: 6549851562626305073}
   m_Layer: 11
-  m_Name: SoundPlayer
+  m_Name: SoundPlayer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,26 +207,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpSoundEvent:
     m_PersistentCalls:
-      m_Calls: []
-  WallJumpSoundEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  SwitchSoundEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  CannotSwitchSoundEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  GroundSoundEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  WalkEvent:
-    m_PersistentCalls:
-<<<<<<< HEAD
-      m_Calls: []
-=======
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6630487251635275628}
         m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
         m_MethodName: PlaySound
         m_Mode: 1
@@ -238,9 +220,108 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 305553829388013198}
         m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
         m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  WallJumpSoundEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2967347405286016694}
+        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  SwitchSoundEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5149706216892974609}
+        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3954290549556391072}
+        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  CannotSwitchSoundEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3839239215772490510}
+        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  GroundSoundEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7754029518371886914}
+        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  WalkEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8164635352720672143}
+        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4685920719882001262}
+        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -253,7 +334,7 @@ MonoBehaviour:
   PermaDieSoundEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3640296592544369360}
         m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
         m_MethodName: PlaySound
         m_Mode: 1
@@ -537,6 +618,7 @@ MonoBehaviour:
   minStepInterval: 0.3
   maxStepInterval: 0.35
   active: 1
+  volume: 1
 --- !u!1 &4893014052212020929
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,4 +836,4 @@ MonoBehaviour:
   minStepInterval: 0.3
   maxStepInterval: 0.35
   active: 1
->>>>>>> master
+  volume: 1
