@@ -47,7 +47,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0
   sharedProfile: {fileID: 11400000, guid: 1e185278614c23342b311679ab5c28ac, type: 2}
 --- !u!1 &1086732611328831630
 GameObject:
@@ -202,10 +202,6 @@ PrefabInstance:
     - target: {fileID: 5823620300621966374, guid: d2110a7eecb83ee4e9080a42b078da8a, type: 3}
       propertyPath: m_Name
       value: UI DeadState Overlay
-      objectReference: {fileID: 0}
-    - target: {fileID: 5823620300621966374, guid: d2110a7eecb83ee4e9080a42b078da8a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2110a7eecb83ee4e9080a42b078da8a, type: 3}
