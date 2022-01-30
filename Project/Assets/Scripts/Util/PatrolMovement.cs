@@ -13,6 +13,7 @@ public class PatrolMovement : MonoBehaviour
         
     }
 
+    // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;

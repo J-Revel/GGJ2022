@@ -9,7 +9,6 @@ public class StepAudioSpawner : MonoBehaviour
     public float maxStepInterval = 1;
     private float currentInterval;
     public bool active = false;
-    public float volume = 1;
 
     void Start()
     {
