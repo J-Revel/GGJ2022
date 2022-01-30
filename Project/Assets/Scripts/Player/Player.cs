@@ -72,6 +72,9 @@ public class Player : MonoBehaviour
 
     public UnityEvent jumpEvent;
 
+    public GameObject[] livingElements;
+    public GameObject[] deadElements;
+
     private void Start()
     {
         this.layerMask = 1 << LayerMask.NameToLayer("Groundable");
@@ -180,6 +183,14 @@ public class Player : MonoBehaviour
             {
                 this.isLiving = !this.isLiving;
                 LivingStateManager.TriggerLifeChanges(this.isLiving);
+                for(int i=0; i<livingElements.Length; i++)
+                {
+                    livingElements[i].SetActive(this.isLiving);
+                }
+                for(int i=0; i<deadElements.Length; i++)
+                {
+                    deadElements[i].SetActive(!this.isLiving);
+                }
             }
             else
             {

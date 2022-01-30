@@ -22,12 +22,12 @@ public class CameraController : MonoBehaviour
     {
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
+        propertyBlock = new MaterialPropertyBlock();
+        meshRenderer.GetPropertyBlock(propertyBlock);
         if(updateMesh)
         {
             UpdateMesh();
         }  
-        propertyBlock = new MaterialPropertyBlock();
-        meshRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetFloat("_Visibility", visibility);
         meshRenderer.SetPropertyBlock(propertyBlock);
     }
@@ -35,11 +35,11 @@ public class CameraController : MonoBehaviour
     public void Update()
     {
         propertyBlock.SetFloat("_Visibility", visibility);
-        meshRenderer.SetPropertyBlock(propertyBlock);
         if(updateMesh && visibility >= 1)
         {
             UpdateMesh();
         }
+        meshRenderer.SetPropertyBlock(propertyBlock);
     }
 
     private Vector3 ProjectOnGamePlane(Vector3 pos)
@@ -61,6 +61,7 @@ public class CameraController : MonoBehaviour
 
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = ProjectOnGamePlane(startPosition);
+        propertyBlock.SetVector("_Eye_Pos", targetPosition);
         vertices.Add(targetPosition - transform.position);
         uvs.Add(new Vector2(0, 0));
 
