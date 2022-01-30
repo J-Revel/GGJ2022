@@ -104,7 +104,8 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _Character_Z: 0.5315661
+    - _CRT_size: 1
+    - _Character_Z: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -113,14 +114,17 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Eye_Fade_Distance: 1
+    - _Eye_Fade_Distance_1: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Line_Width: 22.53
+    - _Line_Width: 66.3
     - _MaxY: 0.7
+    - _Max_Distance: 8
     - _Metallic: 0
-    - _MinY: -3.11
-    - _MovementSpeed: -3
+    - _MinY: -5.76
+    - _MovementSpeed: -1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -134,15 +138,16 @@ Material:
     - _Visibility: -0.03
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _line_count: 20
+    - _line_count: 2
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.8867924, g: 0.3890174, b: 0.3890174, a: 0.5803922}
-    - _Color_1: {r: 0.9339623, g: 0.030838395, b: 0.030838395, a: 0.19215687}
-    - _Color_2: {r: 1, g: 0.051886797, b: 0.051886797, a: 0.2901961}
+    - _Color_1: {r: 0.735849, g: 0.07655776, b: 0.024296915, a: 0}
+    - _Color_2: {r: 1, g: 0.062324487, b: 0, a: 0.5254902}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Hilight_Color: {r: 1, g: 0, b: 0, a: 0}
-    - _Lines_Direction: {r: 0.6, g: 1, b: 0, a: 0}
+    - _Eye_Pos: {r: 1.32, g: 0, b: 0, a: 0}
+    - _Hilight_Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Lines_Direction: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1246893923940543469

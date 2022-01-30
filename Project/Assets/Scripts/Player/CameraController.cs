@@ -16,17 +16,18 @@ public class CameraController : MonoBehaviour
 
     private MeshRenderer meshRenderer;
     private MaterialPropertyBlock propertyBlock;
+    private Player observedPlayer;
     
     void Start()
     {
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
+        propertyBlock = new MaterialPropertyBlock();
+        meshRenderer.GetPropertyBlock(propertyBlock);
         if(updateMesh)
         {
             UpdateMesh();
         }  
-        propertyBlock = new MaterialPropertyBlock();
-        meshRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetFloat("_Visibility", visibility);
         meshRenderer.SetPropertyBlock(propertyBlock);
     }
@@ -34,11 +35,11 @@ public class CameraController : MonoBehaviour
     public void Update()
     {
         propertyBlock.SetFloat("_Visibility", visibility);
-        meshRenderer.SetPropertyBlock(propertyBlock);
-        if(updateMesh)
+        if(updateMesh && visibility >= 1)
         {
             UpdateMesh();
         }
+        meshRenderer.SetPropertyBlock(propertyBlock);
     }
 
     private Vector3 ProjectOnGamePlane(Vector3 pos)
@@ -60,9 +61,11 @@ public class CameraController : MonoBehaviour
 
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = ProjectOnGamePlane(startPosition);
+        propertyBlock.SetVector("_Eye_Pos", targetPosition);
         vertices.Add(targetPosition - transform.position);
         uvs.Add(new Vector2(0, 0));
 
+        bool playerStillObserved = false;
         for(int i=0; i<=subdivisions; i++)
         {
             float angle = ((float)i / subdivisions - 0.5f) * deltaAngle;
@@ -71,6 +74,13 @@ public class CameraController : MonoBehaviour
             Vector3 target = targetPosition + direction * 100;
             if(Physics.Raycast(targetPosition, direction, out hit, 100, layerMask))
             {
+                Player player = hit.collider.GetComponent<Player>();
+                if(player != null)
+                {
+                    player.IsObserved = true;
+                    observedPlayer = player;
+                    playerStillObserved = true;
+                }
                 target = hit.point;
             }
             vertices.Add(target - transform.position);
@@ -82,6 +92,11 @@ public class CameraController : MonoBehaviour
                 triangles.Add(i);
                 triangles.Add(i - 1);
             }
+        }
+        if(observedPlayer != null && !playerStillObserved)
+        {
+            observedPlayer.isObserved = false;
+            observedPlayer = null;
         }
         
         mesh.vertices = vertices.ToArray();

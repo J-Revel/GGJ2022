@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class AudioSpawner : MonoBehaviour
 {
     public AudioSource prefab;
-    public AudioClip clip;
+    public AudioClip[] clips;
     public AudioMixerGroup mixerGroup;
 
     public bool spawnAtStart = false;
@@ -17,9 +17,11 @@ public class AudioSpawner : MonoBehaviour
 
     public void PlaySound()
     {
+        if(!enabled)
+            return;
         prefab.volume = Random.Range(minIntensity, maxIntensity);
         prefab.pitch = Random.Range(minPitch, maxPitch);
-        prefab.clip = clip;
+        prefab.clip = clips[Random.Range(0, clips.Length)];
         prefab.outputAudioMixerGroup = mixerGroup;
         AudioSource source = Instantiate(prefab, transform.position, transform.rotation);
         source.Play();
