@@ -23,7 +23,8 @@ public class PlatformCameraController : MonoBehaviour
     void Update()
     {
         Vector3 targetOffset = (target.position - currentTargetPos);
-        velocity += targetOffset.normalized * Mathf.Clamp01((targetOffset.magnitude - minMovementOffset) / (maxMovementOffset - minMovementOffset)) * acceleration * Time.deltaTime;
+        float distanceRatio = Mathf.Clamp01((targetOffset.magnitude - minMovementOffset) / (maxMovementOffset - minMovementOffset));
+        velocity += targetOffset.normalized * distanceRatio * distanceRatio * acceleration * Time.deltaTime;
         velocity *= Mathf.Pow(friction, Time.deltaTime);
         currentTargetPos += velocity * Time.deltaTime;
         Vector3 direction =  (currentTargetPos - transform.position).normalized;
