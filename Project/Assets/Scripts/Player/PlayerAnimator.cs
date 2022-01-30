@@ -52,9 +52,9 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    public void SwitchPermaRisk(bool isObserved)
+    public void UpdatePermaRisk(bool isObserved, float timeRatio)
     {
-        Debug.Log("Risk" + isObserved);
+        Debug.Log("Risk : " + timeRatio);
     }
 
     private void SwitchState(State state)

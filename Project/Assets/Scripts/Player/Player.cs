@@ -36,8 +36,8 @@ public class Player : MonoBehaviour
 
             if (!isLiving)
             {
-                this.permaDeadTime = properties.permaTime;
-                this.animator.SwitchPermaRisk(value);
+                this.permaDeadTime = 0f;
+                this.animator.UpdatePermaRisk(value, 0f);
             }
 
             isObserved = value;
@@ -373,6 +373,7 @@ public class Player : MonoBehaviour
         if (!isLiving && isObserved)
         {
             this.permaDeadTime += Time.deltaTime;
+            this.animator.UpdatePermaRisk(true, this.permaDeadTime / properties.permaTime);
         }
 
         if (permaDeadTime > properties.permaTime)
