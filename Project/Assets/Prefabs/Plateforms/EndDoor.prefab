@@ -308,5 +308,5 @@ MonoBehaviour:
   spawnAtStart: 0
   minPitch: 1
   maxPitch: 1
-  minIntensity: 1
-  maxIntensity: 1
+  minIntensity: 0.6
+  maxIntensity: 0.6
