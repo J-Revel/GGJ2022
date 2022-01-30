@@ -17,7 +17,7 @@ public class AudioSpawner : MonoBehaviour
 
     public void PlaySound()
     {
-        if(!enabled)
+        if(!this.isActiveAndEnabled)
             return;
         prefab.volume = Random.Range(minIntensity, maxIntensity);
         prefab.pitch = Random.Range(minPitch, maxPitch);
