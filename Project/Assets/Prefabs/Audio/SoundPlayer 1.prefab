@@ -48,7 +48,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 537845af5bb7e89458a196b73f82e035, type: 3}
   mixerGroup: {fileID: 5811197980867162246, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 0.85
   maxPitch: 1.15
   minIntensity: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 47a5488479548be4bb7d37a8b81f60c9, type: 3}
   mixerGroup: {fileID: 8881896134657554299, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 0.95
   maxPitch: 1.05
   minIntensity: 1
@@ -154,7 +154,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 9a0aeaf9c0232bd48af6c90750a26c2c, type: 3}
   mixerGroup: {fileID: 8881896134657554299, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 1
   maxPitch: 1
   minIntensity: 1
@@ -307,10 +307,10 @@ MonoBehaviour:
   WalkEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8164635352720672143}
-        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 8839568951970724623}
+        m_TargetAssemblyTypeName: StepAudioSpawner, Assembly-CSharp
+        m_MethodName: SetVolumeIntensity
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -319,10 +319,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4685920719882001262}
-        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 8287098900695965679}
+        m_TargetAssemblyTypeName: StepAudioSpawner, Assembly-CSharp
+        m_MethodName: SetVolumeIntensity
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -394,7 +394,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c21ec88250b9960459bafb7c7bd0dca6, type: 3}
   mixerGroup: {fileID: -174466184438512632, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 1
   maxPitch: 1
   minIntensity: 1
@@ -447,7 +447,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 0a67556ad6dd62a4b9769deff73d978e, type: 3}
   mixerGroup: {fileID: 5811197980867162246, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 0.85
   maxPitch: 1.15
   minIntensity: 1
@@ -507,7 +507,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9f02ecccccff97a4da12c8abcad4dd1d, type: 3}
   - {fileID: 8300000, guid: ccdad92c28b2bfb4cad905e050279dfc, type: 3}
   mixerGroup: {fileID: 3001412680387153210, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 0.9
   maxPitch: 1.1
   minIntensity: 1
@@ -598,7 +598,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 70c43b25b6efa4d45beab4f4d9231c6d, type: 3}
   mixerGroup: {fileID: 3570924456859368860, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 0.8
   maxPitch: 1.2
   minIntensity: 1
@@ -618,7 +618,6 @@ MonoBehaviour:
   minStepInterval: 0.3
   maxStepInterval: 0.35
   active: 1
-  volume: 1
 --- !u!1 &4893014052212020929
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +701,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: db028ef2b205a9a40a699163b22f51a0, type: 3}
   mixerGroup: {fileID: 1111974758221372435, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 0.85
   maxPitch: 1.15
   minIntensity: 1
@@ -755,7 +754,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c9b96c8e4cbcbc640a5cd05f2e432383, type: 3}
   mixerGroup: {fileID: 8881896134657554299, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 1
   maxPitch: 1
   minIntensity: 1
@@ -816,10 +815,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9f02ecccccff97a4da12c8abcad4dd1d, type: 3}
   - {fileID: 8300000, guid: ccdad92c28b2bfb4cad905e050279dfc, type: 3}
   mixerGroup: {fileID: 3001412680387153210, guid: 7371a39c93339bb41ab3162e59cf47b6, type: 2}
-  spawnAtStart: 1
+  spawnAtStart: 0
   minPitch: 0.9
   maxPitch: 1.1
-  minIntensity: 1
+  minIntensity: 0
   maxIntensity: 1
 --- !u!114 &8839568951970724623
 MonoBehaviour:
@@ -836,4 +835,3 @@ MonoBehaviour:
   minStepInterval: 0.3
   maxStepInterval: 0.35
   active: 1
-  volume: 1

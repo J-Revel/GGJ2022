@@ -148,15 +148,17 @@ public class Player : MonoBehaviour
             if(Mathf.Abs(this.rigidbody.velocity.x) > 1f)
             {
                 animator.SpriteState = PlayerAnimator.State.Walk;
-                soundPlayer.WalkEvent?.Invoke(Mathf.Abs(this.rigidbody.velocity.x) / 5f);
+                soundPlayer.WalkEvent?.Invoke(Mathf.Clamp(Mathf.Abs((this.rigidbody.velocity.x) - 1f) / 6f,0f,1f));
             }
             else
             {
+                soundPlayer.WalkEvent?.Invoke(0f);
                 animator.SpriteState = PlayerAnimator.State.Idle;
             }
         }
         else
         {
+            soundPlayer.WalkEvent?.Invoke(0f);
             float speed = rigidbody.velocity.y;
             if(speed > 0.1f)
             {
