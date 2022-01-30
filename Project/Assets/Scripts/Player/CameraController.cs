@@ -77,7 +77,7 @@ public class CameraController : MonoBehaviour
                 Player player = hit.collider.GetComponent<Player>();
                 if(player != null)
                 {
-                    player.isObserved = true;
+                    player.IsObserved = true;
                     observedPlayer = player;
                     playerStillObserved = true;
                 }
