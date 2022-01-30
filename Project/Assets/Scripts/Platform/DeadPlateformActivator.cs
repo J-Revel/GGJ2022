@@ -6,15 +6,14 @@ public class DeadPlateformActivator : MonoBehaviour
     private Collider collider;
 
     [SerializeField]
-    private Renderer renderer;
+    private GameObject visualGameObject;
 
     // Start is called before the first frame update
     public void Awake()
     {
         if(collider == null) collider = GetComponent<Collider>();
-        if(renderer == null) renderer = GetComponent<Renderer>();
         collider.enabled = false;
-        renderer.enabled = false;
+        visualGameObject.SetActive(false);
         LivingStateManager.RegisterForLifeStateChanges(this.OnLifeStateChanges);
     }
 
@@ -26,7 +25,7 @@ public class DeadPlateformActivator : MonoBehaviour
     private void OnLifeStateChanges(bool isLiving)
     {
         collider.enabled = !isLiving;
-        renderer.enabled = !isLiving;
+        visualGameObject.SetActive(!isLiving);
     }
 }
 
