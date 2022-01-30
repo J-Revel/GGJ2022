@@ -25,7 +25,7 @@ public class PressurePlaque : MonoBehaviour
     private Vector3 localPressPosition;
 
     [SerializeField]
-    private List<IMechactivable> mechactivables;
+    private List<GameObject> mechactivables = new List<GameObject>();
     [SerializeField]
     private Type type;
     [SerializeField]
@@ -124,13 +124,33 @@ public class PressurePlaque : MonoBehaviour
     private void Desactivate()
     {
         activated = false;
-        mechactivables.ForEach(mecha => mecha.SwitchState(false));
+        mechactivables.ForEach(mecha => {
+            IMechactivable mechaComponent = mecha.GetComponent<IMechactivable>();
+            if (mechaComponent != null)
+            {
+                mechaComponent.SwitchState(false);
+            }
+            else
+            {
+                Debug.LogWarning("This gameObject does not contain a mechativable", mecha);
+            }
+        });
     }
 
     private void Activate()
     {
         activated = true;
-        mechactivables.ForEach(mecha => mecha.SwitchState(true));
+        mechactivables.ForEach(mecha => {
+            IMechactivable mechaComponent = mecha.GetComponent<IMechactivable>();
+            if (mechaComponent != null)
+            {
+                mechaComponent.SwitchState(true);
+            }
+            else
+            {
+                Debug.LogWarning("This gameObject does not contain a mechativable", mecha);
+            }
+        });
     }
 }
 
