@@ -3,6 +3,8 @@ using UnityEngine.Audio;
 
 public class GameMusicController : MonoBehaviour
 {
+    private static GameMusicController instance;
+
     private float transitionValue = 1f;
     private bool isLiving = true;
 
@@ -32,10 +34,22 @@ public class GameMusicController : MonoBehaviour
         this.mixer.SetFloat("AliveVolume", (1f - transitionValue) * -80f);
     }
 
-    // Start is called before the first frame update
-    public void Awake()
+
+    private void Awake()
     {
-        LivingStateManager.RegisterForLifeStateChanges(this.OnLifeStateChanges);
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+            LivingStateManager.RegisterForLifeStateChanges(this.OnLifeStateChanges);
+            DontDestroyOnLoad(this);
+        }
+
+        //Reset instance state
+        instance.isLiving = true;
     }
 
     private void OnDestroy()
