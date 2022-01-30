@@ -95,7 +95,7 @@ BoxCollider:
   m_GameObject: {fileID: 6732022356079577469}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.2959175, y: 2.0610108, z: 0.090324864}
   m_Center: {x: -0.49928176, y: 0, z: -0.023845842}
@@ -194,7 +194,7 @@ BoxCollider:
   m_GameObject: {fileID: 7126518159324897636}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.8192637, y: 0.2475853, z: 0.09321167}
   m_Center: {x: -7.9905477e-10, y: -0.92350626, z: 0.020075414}
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55609425b15d24aed8efa1d3d0e86128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activated: 1
+  activated: 0
   door: {fileID: 5608291986174948648}
 --- !u!65 &1132187867
 BoxCollider:
