@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3372285907901461915}
   - component: {fileID: 5620590237421623917}
   - component: {fileID: 1132187863}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cardboard_DoorPanel_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6548704489720754753}
   - component: {fileID: 459184003382437519}
   - component: {fileID: 1195959387}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cardboard_DoorFrame_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 1132187865}
   - component: {fileID: 1132187867}
   - component: {fileID: 403159053}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EndDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
