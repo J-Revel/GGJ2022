@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 6548704489720754753}
   - component: {fileID: 459184003382437519}
   - component: {fileID: 1195959387}
+  - component: {fileID: 7004899053158027311}
   m_Layer: 3
   m_Name: Cardboard_DoorFrame_01
   m_TagString: Untagged
@@ -195,8 +196,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.0623574, y: 0.2475853, z: 3.1578865}
-  m_Center: {x: -0.62154716, y: 0.94000006, z: -1.5122657}
+  m_Size: {x: 3.0623572, y: 0.32395554, z: 3.1578867}
+  m_Center: {x: -0.6215473, y: 0.9781852, z: -1.5122658}
+--- !u!65 &7004899053158027311
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126518159324897636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.33, y: 0.26, z: 3.09}
+  m_Center: {x: -0.08, y: -1.02, z: -1.5}
 --- !u!1 &8720208051813498205
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55609425b15d24aed8efa1d3d0e86128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activated: 0
+  activated: 1
   OnSwitchStateEvent:
     m_PersistentCalls:
       m_Calls:
@@ -273,8 +287,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -0.8, y: 0, z: -0.52}
+  m_Size: {x: 1.54, y: 1.3, z: 0.49}
+  m_Center: {x: -0.54, y: -0.02, z: -1.13}
 --- !u!114 &403159053
 MonoBehaviour:
   m_ObjectHideFlags: 0
