@@ -307,10 +307,10 @@ MonoBehaviour:
   WalkEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8164635352720672143}
-        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 8839568951970724623}
+        m_TargetAssemblyTypeName: StepAudioSpawner, Assembly-CSharp
+        m_MethodName: SetVolumeIntensity
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -319,10 +319,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4685920719882001262}
-        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 8287098900695965679}
+        m_TargetAssemblyTypeName: StepAudioSpawner, Assembly-CSharp
+        m_MethodName: SetVolumeIntensity
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -618,7 +618,6 @@ MonoBehaviour:
   minStepInterval: 0.3
   maxStepInterval: 0.35
   active: 1
-  volume: 1
 --- !u!1 &4893014052212020929
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,7 +818,7 @@ MonoBehaviour:
   spawnAtStart: 1
   minPitch: 0.9
   maxPitch: 1.1
-  minIntensity: 1
+  minIntensity: 0
   maxIntensity: 1
 --- !u!114 &8839568951970724623
 MonoBehaviour:
@@ -836,4 +835,3 @@ MonoBehaviour:
   minStepInterval: 0.3
   maxStepInterval: 0.35
   active: 1
-  volume: 1
