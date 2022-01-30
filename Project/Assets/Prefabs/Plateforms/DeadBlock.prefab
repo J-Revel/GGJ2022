@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4116076165078889863}
   - component: {fileID: 4116076165078889866}
   - component: {fileID: 4116076165078889862}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: DeadBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

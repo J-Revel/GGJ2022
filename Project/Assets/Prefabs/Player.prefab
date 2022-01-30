@@ -1292,6 +1292,9 @@ MonoBehaviour:
   collider: {fileID: 1595570151}
   renderer: {fileID: 2727436067306171926}
   animator: {fileID: 5836861447551720571}
+  groundedLayerMask:
+    serializedVersion: 2
+    m_Bits: 4104
   jumpAction:
     m_Name: Jump
     m_Type: 1

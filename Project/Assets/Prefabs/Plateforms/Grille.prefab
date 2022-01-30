@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5558296915943852745}
   - component: {fileID: 5558296915943852746}
   - component: {fileID: 5558296915943852742}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Grille
   m_TagString: Untagged
   m_Icon: {fileID: 0}

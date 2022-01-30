@@ -325,12 +325,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deltaAngle: 50.3
-  startAngle: 0
   subdivisions: 100
   layerMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 4095
   updateMesh: 1
   meshFilter: {fileID: 2173697505749315281}
   zPosition: 0.5315661
   targetElement: {fileID: 2173697504336508988}
+  visibility: 0

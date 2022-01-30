@@ -54,13 +54,15 @@ public class Player : MonoBehaviour
     PlayerAnimator animator;
 
     //Raycast Cache
-    private int layerMask;
     Vector3 raycastPosition;
     float raycastLength = 0.2f;
     RaycastHit hit;
     Vector3 raycastDirection;
     Vector3 raycastNormal;
     float raycastWidth;
+
+    [SerializeField]
+    private LayerMask groundedLayerMask;
 
     //Inputs
     public InputAction jumpAction;
@@ -100,8 +102,6 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        this.layerMask = 1 << LayerMask.NameToLayer("Groundable");
-
         jumpAction.started += context =>
         {
             wantedJump = true;
@@ -401,7 +401,7 @@ public class Player : MonoBehaviour
         {
             float relativeOffset = (((float)raycastCount / 2f) - i) / (float)raycastCount;
             Vector3 offset = raycastNormal * relativeOffset * raycastWidth;
-            bool hitted = Physics.Raycast(raycastPosition + offset, raycastDirection, out hit, raycastLength, layerMask);
+            bool hitted = Physics.Raycast(raycastPosition + offset, raycastDirection, out hit, raycastLength, groundedLayerMask);
             Debug.DrawRay(raycastPosition + offset, raycastDirection * raycastLength, hitted ? Color.green : Color.red, 0.05f, false);
             if (hitted && hit.distance < minHitDistance)
             {
