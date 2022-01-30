@@ -9,9 +9,9 @@ public class PlayerAnimator : MonoBehaviour
 
     public enum State {Idle, Walk, Jump, Float, Fall, Wall}
     private bool isLiving = true;
+    private bool permaDeath;
 
-    [Header("Sound")]
-
+    /*
     [SerializeField]
     public UnityEvent jumpSoundEvent;
     [SerializeField]
@@ -22,6 +22,7 @@ public class PlayerAnimator : MonoBehaviour
     public UnityEvent wallSoundEvent;
     [SerializeField]
     public UnityEvent groundSoundEvent;
+    */
 
     private string GetStateId(bool isAlive, State state)
     {
@@ -51,41 +52,26 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
+    public void SwitchPermaRisk(bool isObserved)
+    {
+        Debug.Log("Risk" + isObserved);
+    }
+
     private void SwitchState(State state)
     {
         if (isLiving)
         {
-            switch (state)
-            {
-                case State.Idle:
-                    if(this.state != State.Walk )
-                    {
-                        groundSoundEvent?.Invoke();
-                    }
-                    break;
-                case State.Walk:
-                    if (this.state != State.Idle)
-                    {
-                        groundSoundEvent?.Invoke();
-                    }
-                    break;
-                case State.Jump:
-                        jumpSoundEvent?.Invoke();
-                    break;
-                case State.Float:
-                    break;
-                case State.Fall:
-                    break;
-                case State.Wall:
-                    wallSoundEvent?.Invoke();
-                    break;
-            }
             sprite.SelectAnim(GetStateId(isLiving, state));
         }
         this.state = state;
     }
 
-    // Start is called before the first frame update
+    public void TriggerPermaDeath()
+    {
+        permaDeath = true;
+        sprite.SelectAnim("Permanent Death");
+    }
+
     public void Awake()
     {
         LivingStateManager.RegisterForLifeStateChanges(this.OnLifeStateChanges);
@@ -101,12 +87,8 @@ public class PlayerAnimator : MonoBehaviour
         this.isLiving = isLiving;
         if (this.isLiving)
         {
+            this.SwitchPermaRisk(false);
             this.CleanRendererAnimation();
-            this.livingSoundEvent?.Invoke();
-        }
-        else
-        {
-            this.deadSoundEvent?.Invoke();
         }
 
         sprite.SelectAnim(GetStateId(this.isLiving, state));
@@ -118,15 +100,10 @@ public class PlayerAnimator : MonoBehaviour
         this.scaleAnimationTime = 0f;
     }
 
-    private void Update()
+    private void RendererAnimation()
     {
-        if (isLiving)
-        {
-            return;
-        }
-
         scaleAnimationTime += Time.deltaTime * scaleAnimationSpeed;
-        float scaleXAnimationValue = (1f + Mathf.Sin(scaleAnimationTime))/2f;
+        float scaleXAnimationValue = (1f + Mathf.Sin(scaleAnimationTime)) / 2f;
         float scaleYAnimationValue = (1f + Mathf.Sin(scaleAnimationTime + 0.5f)) / 2f;
 
         float scaleX = 0.9f + 0.15f * scaleXAnimationValue;
@@ -134,8 +111,13 @@ public class PlayerAnimator : MonoBehaviour
         this.transform.localScale = new Vector3(scaleX, scaleY, 1f);
     }
 
-    private float EaseInOutSin(float x)
+    private void Update()
     {
-        return -(Mathf.Cos(Mathf.PI * x) - 1) / 2;
+        if (isLiving || permaDeath)
+        {
+            return;
+        }
+
+        RendererAnimation();
     }
 }

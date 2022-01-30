@@ -29,4 +29,5 @@ public class PlayerProperties : ScriptableObject
 
     [HeaderAttribute("Help")]
     public float coyoteTime = 0.2f;
+    public float permaTime = 1f;
 }
