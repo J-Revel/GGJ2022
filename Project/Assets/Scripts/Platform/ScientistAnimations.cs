@@ -9,7 +9,7 @@ public class ScientistAnimations : MonoBehaviour
     public bool visible = false;
     private float animTime = 0;
     public float lightConeAnimOffset = 0.8f;
-    private Vector3 startPosition;
+    public Vector3 startPosition;
     public CameraController lightConeRenderer;
     public float breathSpeed = 0.3f;
     public float breathMovement = 2;
@@ -46,8 +46,8 @@ public class ScientistAnimations : MonoBehaviour
         transform.position = startPosition + animRatio * animRatio * appearAxis * startDistance + Vector3.up * breathMovement * Mathf.Sin(breathSpeed * breathTime);
         lightConeRenderer.visibility = Mathf.Clamp01(animTime / animDuration - lightConeAnimOffset) / (1 - lightConeAnimOffset);
         float colorRatio = 1 - animRatio * animRatio;
-        animatedSprite.spriteRenderer.color = new Color(colorRatio, colorRatio, colorRatio, 1);
-        eyeSpriteRenderer.color = new Color(colorRatio, colorRatio, colorRatio, 1);
+        animatedSprite.spriteRenderer.color = new Color(1, 1, 1, colorRatio);
+        eyeSpriteRenderer.color = new Color(1, 1, 1, colorRatio);
         eye.transform.localPosition = eyeStartOffset + Quaternion.AngleAxis(Mathf.Sin(Time.time * eyeAngleAnimSpeed) * lightConeRenderer.deltaAngle, Vector3.forward) * lightConeRenderer.startDirection * eyeMaxDistance;
         blinkTime -= Time.deltaTime;
         if(blinkTime < 0)
