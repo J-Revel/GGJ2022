@@ -25,7 +25,7 @@ public class PressurePlaque : MonoBehaviour
     private Vector3 localPressPosition;
 
     [SerializeField]
-    private List<IMechactivable> mechactivables;
+    private List<IMechactivable> mechactivables = new List<IMechactivable>();
     [SerializeField]
     private Type type;
     [SerializeField]
