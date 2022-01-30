@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -869,7 +869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &572505667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16799,6 +16799,7 @@ MonoBehaviour:
   animDuration: 0.01
   visible: 1
   lightConeAnimOffset: 0.8
+  startPosition: {x: 0, y: 0, z: 0}
   lightConeRenderer: {fileID: 5992296377652017373}
   breathSpeed: 0.3
   breathMovement: 0.1
@@ -21679,7 +21680,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9066280598791410646}
   m_LocalRotation: {x: -0.7070862, y: -0, z: -0, w: 0.7071274}
-  m_LocalPosition: {x: -1.486, y: -1.89, z: 1.05}
+  m_LocalPosition: {x: -1.567, y: -1.89, z: 1.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21694,7 +21695,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7004611173482287279}
   m_LocalRotation: {x: -0.7070862, y: -0, z: -0, w: 0.7071274}
-  m_LocalPosition: {x: -1.993, y: -1.89, z: 1.0500002}
+  m_LocalPosition: {x: -1.742, y: -1.89, z: 1.0500002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
