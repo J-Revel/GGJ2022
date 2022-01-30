@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour
         if (reloadAction.ReadValue<float>() == 1f && ! isTransitionning)
         {
             OnReloadLevelEvent?.Invoke();
-            StartTransition(levelID);
+            Reset();
         }
 
         if(!isTransitionning && transitionTime > 0f)
@@ -78,6 +78,11 @@ public class LevelManager : MonoBehaviour
     private void AdaptVisual()
     {
         canvasGroup.alpha = transitionTime / transitionDuration;
+    }
+
+    public static void Reset()
+    {
+        instance.StartTransition(instance.levelID);
     }
 
     public static void StartTransitionToScene(int levelID)
