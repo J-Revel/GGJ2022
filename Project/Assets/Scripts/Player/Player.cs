@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     private enum Facing { Left, Right };
+    private bool permaDead = false;
     private bool isLiving = true;
     public bool isObserved = false;
     private Facing facing = Facing.Right;
@@ -23,6 +24,25 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private Collider collider;
+
+    public bool IsObserved {
+        get => IsObserved;
+        set
+        {
+            if(isObserved = value)
+            {
+                return;
+            }
+
+            if (!isLiving)
+            {
+                this.permaDeadTime = 0f;
+                this.animator.UpdatePermaRisk(value, 0f);
+            }
+
+            isObserved = value;
+        }
+    }
 
     [SerializeField]
     private SpriteRenderer renderer;
@@ -59,6 +79,8 @@ public class Player : MonoBehaviour
     private bool hasRightWall;
     private bool isJumping;
     private bool isClimbing;
+
+    private float permaDeadTime;
 
     private Vector2 currentJumpingDirection;
     private bool currentIsSideJump;
@@ -107,6 +129,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (permaDead)
+        {
+            return;
+        }
+
         //Visual update according to state
         if (this.isGrounded)
         {
@@ -143,6 +170,15 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        float gravityForce = properties.gravityForce * Time.fixedDeltaTime;
+        rigidbody.AddForce(Vector3.down * gravityForce);
+
+        this.CheckPermaDie();
+        if (permaDead)
+        {
+            return;
+        }
+
         //Check states
         this.CheckFacing();
         this.CheckGround();
@@ -150,7 +186,6 @@ public class Player : MonoBehaviour
         this.CheckObserved();
 
         //Try user interactions
-        this.TryInteract();
         this.TrySwitch();
         this.TryJump();
 
@@ -170,9 +205,6 @@ public class Player : MonoBehaviour
             float frictionForce = properties.gravityForce * Time.fixedDeltaTime * properties.frictionGravityRatio;
             rigidbody.AddForce(Vector3.up * frictionForce);
         }
-
-        float gravityForce = properties.gravityForce * Time.fixedDeltaTime;
-        rigidbody.AddForce(Vector3.down * gravityForce);
     }
 
     private void TrySwitch()
@@ -205,15 +237,6 @@ public class Player : MonoBehaviour
         //TODO change this.isObserved state
         //TODO change sprite
         return false;
-    }
-
-    private void TryInteract()
-    {
-        if (this.wantedInteraction)
-        {
-            //TODO Raycast to find interaction
-            this.wantedInteraction = false;
-        }
     }
 
     private void CheckFacing()
@@ -343,6 +366,26 @@ public class Player : MonoBehaviour
         {
             timeSinceGrounded += Time.deltaTime;
         }
+    }
+
+    private void CheckPermaDie()
+    {
+        if (!isLiving && isObserved)
+        {
+            this.permaDeadTime += Time.deltaTime;
+            this.animator.UpdatePermaRisk(true, this.permaDeadTime / properties.permaTime);
+        }
+
+        if (permaDeadTime > properties.permaTime)
+        {
+            PermaDie();
+        }
+    }
+
+    private void PermaDie()
+    {
+        this.permaDead = true;
+        animator.TriggerPermaDeath();
     }
 
     private bool RaycastGroundable(out float minHitDistance, int raycastCount = 11)
