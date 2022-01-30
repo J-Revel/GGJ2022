@@ -844,6 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedfffc0aec434fb1959c14a3835cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skullPrefab: {fileID: 8530898375848478122, guid: cf8d6589d74f0e544a965e4219e07c5b, type: 3}
   isObserved: 0
   deadProperties: {fileID: 11400000, guid: 2e221cc07b782493595a04b47fbdb5fe, type: 2}
   livingProperties: {fileID: 11400000, guid: f4bd259334c074cf2aff809bb3a8d5da, type: 2}

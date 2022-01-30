@@ -1,10 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    public Rigidbody skullPrefab;
     public static Player instance;
     private enum Facing { Left, Right };
     private bool permaDead = false;
@@ -408,7 +409,16 @@ public class Player : MonoBehaviour
     private void PermaDie()
     {
         this.permaDead = true;
+        StartCoroutine(PermaDeathAnimCoroutine());
         animator.TriggerPermaDeath();
+    }
+    public IEnumerator PermaDeathAnimCoroutine()
+    {
+        animator.gameObject.SetActive(false);
+        Instantiate(skullPrefab, transform.position, Quaternion.identity).velocity = new Vector3(Random.Range(-2, 2), 5, 0);
+        yield return new WaitForSeconds(3);
+        
+        LevelManager.Reset();
     }
 
     private bool RaycastGroundable(out float minHitDistance, int raycastCount = 11)

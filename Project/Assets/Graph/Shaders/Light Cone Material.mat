@@ -121,7 +121,7 @@ Material:
     - _GlossyReflections: 0
     - _Line_Width: 66.3
     - _MaxY: 0.7
-    - _Max_Distance: 8
+    - _Max_Distance: 15
     - _Metallic: 0
     - _MinY: -5.76
     - _MovementSpeed: -1
