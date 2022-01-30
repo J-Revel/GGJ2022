@@ -87,7 +87,7 @@ public class PlayerAnimator : MonoBehaviour
         this.isLiving = isLiving;
         if (this.isLiving)
         {
-            this.SwitchPermaRisk(false);
+            this.UpdatePermaRisk(false, 0f);
             this.CleanRendererAnimation();
         }
 
