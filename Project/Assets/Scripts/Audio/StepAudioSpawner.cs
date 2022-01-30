@@ -32,5 +32,6 @@ public class StepAudioSpawner : MonoBehaviour
     {
         active = true;
         volumeRatio = value;
+        Debug.Log("VOLUME " + volumeRatio);
     }
 }
