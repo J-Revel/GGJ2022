@@ -115,6 +115,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 9207076672638034012}
+  transitionEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1255832458947200872
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedfffc0aec434fb1959c14a3835cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isObserved: 0
   deadProperties: {fileID: 11400000, guid: 2e221cc07b782493595a04b47fbdb5fe, type: 2}
   livingProperties: {fileID: 11400000, guid: f4bd259334c074cf2aff809bb3a8d5da, type: 2}
   rigidbody: {fileID: 1255832458947200879}
@@ -252,6 +268,9 @@ MonoBehaviour:
       m_Action: Horizontal
       m_Flags: 8
     m_Flags: 0
+  jumpEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1255832458947200879
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -8,6 +9,19 @@ public class PlayerAnimator : MonoBehaviour
 
     public enum State {Idle, Walk, Jump, Float, Fall, Wall}
     private bool isLiving = true;
+
+    [Header("Sound")]
+
+    [SerializeField]
+    public UnityEvent jumpSoundEvent;
+    [SerializeField]
+    public UnityEvent livingSoundEvent;
+    [SerializeField]
+    public UnityEvent deadSoundEvent;
+    [SerializeField]
+    public UnityEvent wallSoundEvent;
+    [SerializeField]
+    public UnityEvent groundSoundEvent;
 
     private string GetStateId(bool isAlive, State state)
     {
@@ -39,8 +53,36 @@ public class PlayerAnimator : MonoBehaviour
 
     private void SwitchState(State state)
     {
+        if (isLiving)
+        {
+            switch (state)
+            {
+                case State.Idle:
+                    if(this.state != State.Walk )
+                    {
+                        groundSoundEvent?.Invoke();
+                    }
+                    break;
+                case State.Walk:
+                    if (this.state != State.Idle)
+                    {
+                        groundSoundEvent?.Invoke();
+                    }
+                    break;
+                case State.Jump:
+                        jumpSoundEvent?.Invoke();
+                    break;
+                case State.Float:
+                    break;
+                case State.Fall:
+                    break;
+                case State.Wall:
+                    wallSoundEvent?.Invoke();
+                    break;
+            }
+            sprite.SelectAnim(GetStateId(isLiving, state));
+        }
         this.state = state;
-        if(isLiving) sprite.SelectAnim(GetStateId(isLiving,state));
     }
 
     // Start is called before the first frame update
@@ -56,8 +98,17 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnLifeStateChanges(bool isLiving)
     {
-        this.CleanRendererAnimation();
         this.isLiving = isLiving;
+        if (this.isLiving)
+        {
+            this.CleanRendererAnimation();
+            this.livingSoundEvent?.Invoke();
+        }
+        else
+        {
+            this.deadSoundEvent?.Invoke();
+        }
+
         sprite.SelectAnim(GetStateId(this.isLiving, state));
     }
 
