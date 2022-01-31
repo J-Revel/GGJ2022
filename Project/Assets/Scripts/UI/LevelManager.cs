@@ -99,8 +99,8 @@ public class LevelManager : MonoBehaviour
     private void StartTransition(int levelID)
     {
         this.levelID = levelID;
-        if(this.levelID == 12)
-            this.levelID = 12;
+        if(this.levelID > 15)
+            this.levelID = 0;
         this.isTransitionning = true;
     }
 
