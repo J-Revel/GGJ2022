@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+[Serializable]
+public class BoolEvent : UnityEvent<bool> { };
 
 public class PressurePlaque : MonoBehaviour
 {
@@ -20,12 +24,13 @@ public class PressurePlaque : MonoBehaviour
     private Collider collider;
 
     [SerializeField]
+    private BoolEvent activatedSwitchEvent;
+
+    [SerializeField]
     private Vector3 localStartingPosition;
     [SerializeField]
     private Vector3 localPressPosition;
 
-    [SerializeField]
-    private List<GameObject> mechactivables = new List<GameObject>();
     [SerializeField]
     private Type type;
     [SerializeField]
@@ -124,37 +129,12 @@ public class PressurePlaque : MonoBehaviour
     private void Desactivate()
     {
         activated = false;
-        mechactivables.ForEach(mecha => {
-            IMechactivable mechaComponent = mecha.GetComponent<IMechactivable>();
-            if (mechaComponent != null)
-            {
-                mechaComponent.SwitchState(false);
-            }
-            else
-            {
-                Debug.LogWarning("This gameObject does not contain a mechativable", mecha);
-            }
-        });
+        activatedSwitchEvent?.Invoke(false);
     }
 
     private void Activate()
     {
         activated = true;
-        mechactivables.ForEach(mecha => {
-            IMechactivable mechaComponent = mecha.GetComponent<IMechactivable>();
-            if (mechaComponent != null)
-            {
-                mechaComponent.SwitchState(true);
-            }
-            else
-            {
-                Debug.LogWarning("This gameObject does not contain a mechativable", mecha);
-            }
-        });
+        activatedSwitchEvent?.Invoke(true);
     }
-}
-
-public interface IMechactivable
-{
-    public void SwitchState(bool activated);
 }

@@ -1,40 +1,32 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-[Serializable]
-public class SwitchEvent : UnityEvent<bool>
+public class MovingPlateform : MonoBehaviour
 {
-
-}
-
-public class EndDoor : MonoBehaviour
-{
-    [SerializeField]
     private bool activated;
 
-    private float transitionDuration = 0.5f;
+    private float transitionDuration = 1f;
     private float transitionValue;
 
     [SerializeField]
     private SwitchEvent OnSwitchStateEvent;
 
-    private float rotationActivatedValue = 140f;
-
     [SerializeField]
-    private Transform door;
+    private Transform activatedTarget;
+
+    private Vector3 startingPosition;
 
     // Start is called before the first frame update
     void Start()
     {
+        startingPosition = this.transform.position;
         transitionValue = activated ? 1f : 0f;
         UpdateVisual();
     }
 
     private void UpdateVisual()
     {
-        float transitionRotation = rotationActivatedValue * transitionValue;
-        door.transform.localRotation = Quaternion.AngleAxis(transitionRotation, Vector3.up);
+        Vector3 transitionPosition = startingPosition * (1f - transitionValue) + transitionValue * activatedTarget.position;
+        this.transform.position = transitionPosition;
     }
 
     // Update is called once per frame
@@ -49,17 +41,6 @@ public class EndDoor : MonoBehaviour
         {
             transitionValue -= Time.deltaTime / transitionDuration;
             UpdateVisual();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            if (activated)
-            {
-                LevelManager.StartTransitionToNextScene();
-            }
         }
     }
 
