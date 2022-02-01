@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     public Rigidbody skullPrefab;
     public static Player instance;
     private enum Facing { Left, Right };
-    private bool permaDead = false;
-    private bool isLiving = true;
+    public bool permaDead = false;
+    public bool isLiving = true;
     public bool isObserved = false;
     private Facing facing = Facing.Right;
 
@@ -505,7 +505,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void PermaDie()
+    public void PermaDie()
     {
         this.permaDead = true;
         StartCoroutine(PermaDeathAnimCoroutine());

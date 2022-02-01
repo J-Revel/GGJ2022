@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cardboard Platform Material Dead
-  m_Shader: {fileID: -6465566751694194690, guid: 94e00d5faf5b10742bf4cb91f3aa5c5d, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: c90bbf8e061b80443a6fa3f36149b527, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
