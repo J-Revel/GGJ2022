@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focalDistance: 10
-  target: {fileID: 0}
   camera: {fileID: 6445354215512700990}
   acceleration: 30
   friction: 0.02
@@ -270,7 +269,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0
   sharedProfile: {fileID: 11400000, guid: cbfe3ea023b97eb4598b08a7c6735c02, type: 2}
 --- !u!114 &1435377899780968926
 MonoBehaviour:
