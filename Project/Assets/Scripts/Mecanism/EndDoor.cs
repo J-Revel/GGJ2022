@@ -58,7 +58,7 @@ public class EndDoor : MonoBehaviour
         {
             if (activated)
             {
-                LevelManager.StartTransitionToNextScene();
+                LevelManager.LoadNextLevel();
             }
         }
     }

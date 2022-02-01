@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -10,20 +11,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private InputAction reloadAction;
 
-    [SerializeField]
-    private int levelID = 0;
-
     private CanvasGroup canvasGroup;
 
-    private UnityEvent OnNextLevelEvent;
-
-    private UnityEvent OnReloadLevelEvent;
-
-    private UnityEvent OnStartLevelEvent;
-
-    private float transitionTime;
     private float transitionDuration = 1.5f;
     private bool isTransitionning;
+
+    [Scene]
+    public string[] levelScenes;
 
     private void Awake()
     {
@@ -37,11 +31,8 @@ public class LevelManager : MonoBehaviour
             canvasGroup = GetComponentInChildren<CanvasGroup>();
             DontDestroyOnLoad(this);
 
-            transitionTime = transitionDuration;
             reloadAction.Enable();
         }
-
-        instance.OnStartLevelEvent?.Invoke();
     }
 
     // Update is called once per frame
@@ -49,63 +40,83 @@ public class LevelManager : MonoBehaviour
     {
         if (reloadAction.ReadValue<float>() == 1f && ! isTransitionning)
         {
-            OnReloadLevelEvent?.Invoke();
             Reset();
         }
 
-        if(!isTransitionning && transitionTime > 0f)
-        {
-            transitionTime = Mathf.Max(0f, this.transitionTime - Time.deltaTime);
-            AdaptVisual();
-        }
-        else if (isTransitionning)
-        {
-            if (transitionTime < transitionDuration)
-            {
-                this.transitionTime += Time.deltaTime;
-                AdaptVisual();
-            }
-            else
-            {
-                this.isTransitionning = false;
-                this.transitionTime = transitionDuration;
-                AdaptVisual();
-                LoadSceneByID();
-            }
-        }
+        // if(!isTransitionning && transitionTime > 0f)
+        // {
+        //     transitionTime = Mathf.Max(0f, this.transitionTime - Time.deltaTime);
+        //     AdaptVisual();
+        // }
+        // else if (isTransitionning)
+        // {
+        //     if (transitionTime < transitionDuration)
+        //     {
+        //         this.transitionTime += Time.deltaTime;
+        //         AdaptVisual();
+        //     }
+        //     else
+        //     {
+        //         this.isTransitionning = false;
+        //         this.transitionTime = transitionDuration;
+        //         AdaptVisual();
+        //         SceneManager.LoadScene(levelScenes[levelIndex], LoadSceneMode.Single);
+        //     }
+        // }
     }
 
-    private void AdaptVisual()
-    {
-        canvasGroup.alpha = transitionTime / transitionDuration;
-    }
 
     public static void Reset()
     {
-        instance.StartTransition(instance.levelID);
+        int selectedLevel = -1;
+        for(int i=0; i<instance.levelScenes.Length; i++)
+        {
+            if(instance.levelScenes[i] == SceneManager.GetActiveScene().name)
+            {
+                selectedLevel = i;
+            }
+        }
+        
+        instance.LoadLevel(selectedLevel);
     }
 
-    public static void StartTransitionToScene(int levelID)
+    public void LoadLevel(int levelIndex)
     {
-        instance.StartTransition(levelID);
+        instance.StartCoroutine(LoadLevelCoroutine(levelIndex));
     }
 
-    public static void StartTransitionToNextScene()
+    public static void LoadNextLevel()
     {
-        instance.OnNextLevelEvent?.Invoke();
-        StartTransitionToScene(instance.levelID + 1);
+        int selectedLevel = -1;
+        for(int i=0; i<instance.levelScenes.Length; i++)
+        {
+            if(instance.levelScenes[i] == SceneManager.GetActiveScene().name)
+            {
+                selectedLevel = i;
+            }
+        }
+        
+        instance.LoadLevelCoroutine(selectedLevel + 1);
     }
 
-    private void StartTransition(int levelID)
+    private IEnumerator LoadLevelCoroutine(int levelIndex)
     {
-        this.levelID = levelID;
-        if(this.levelID == 15)
-            this.levelID = 0;
+        float time = 0;
         this.isTransitionning = true;
-    }
-
-    private void LoadSceneByID()
-    {
-        SceneManager.LoadScene($"Level{levelID}", LoadSceneMode.Single);
+        while(time < transitionDuration)
+        {
+            time += Time.deltaTime;
+            canvasGroup.alpha = time / transitionDuration;
+            yield return null;
+        }
+        AsyncOperation op = SceneManager.LoadSceneAsync(levelScenes[levelIndex], LoadSceneMode.Single);
+        while(!op.isDone)
+            yield return null;
+        while(time > 0)
+        {
+            time -= Time.deltaTime;
+            canvasGroup.alpha = time / transitionDuration;
+            yield return null;
+        }
     }
 }

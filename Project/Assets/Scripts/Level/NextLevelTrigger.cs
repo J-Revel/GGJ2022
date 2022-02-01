@@ -16,6 +16,6 @@ public class NextLevelTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        LevelManager.StartTransitionToNextScene();
+        LevelManager.LoadNextLevel();
     }
 }
