@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
     private float currentJumpForce => this.currentIsSideJump ? properties.sideJumpForce : properties.jumpForce;
     private float currentJumpImpulsion => this.currentIsSideJump ? properties.sideJumpImpulsion : properties.jumpImpulsion;
     private float currentMaxJumpingTime => this.currentIsSideJump ? properties.maxSideJumpingTime : properties.maxJumpingTime;
+    private float currentJumpingNoneControlLimit => this.currentIsSideJump ? properties.sideJumpingNoneControlLimit : properties.jumpingNoneControlLimit;
     private float currentMinJumpingTime => this.currentIsSideJump ? properties.minSideJumpingTime : properties.minJumpingTime;
     private bool isInAir => !(this.isGrounded && !isJumping);
 
@@ -185,25 +186,75 @@ public class Player : MonoBehaviour
         float gravityForce = properties.gravityForce * Time.fixedDeltaTime;
         rigidbody.AddForce(Vector3.down * gravityForce);
 
+        this.CheckFacing();
+        this.CheckGround();
+
+        if (this.isLiving)
+        {
+            LivingControl();
+        }
+        else
+        {
+            DeadControl();
+        }
+    }
+
+    private void DeadControl()
+    {
         this.CheckPermaDie();
         if (permaDead)
         {
             return;
         }
 
+        //Try user interactions
+        this.TrySwitch();
+        this.TryDeadJump();
+
+        if (isJumping)
+        {
+            float deltaJumpForce = this.currentJumpForce * Time.fixedDeltaTime;
+            rigidbody.AddForce(currentJumpingDirection * deltaJumpForce);
+        }
+
+        if (!(isJumping && currentJumpingTime < currentJumpingNoneControlLimit))
+        {
+            float translationSpeed = this.isInAir ? this.properties.airSpeed : this.properties.speed;
+            float deltaTranslationForce = this.wantedTranslation * translationSpeed * Time.fixedDeltaTime;
+            rigidbody.AddForce(Vector3.right * deltaTranslationForce);
+        }
+
+        if (this.isClimbing && rigidbody.velocity.y < 0f)
+        {
+            float frictionForce = properties.gravityForce * Time.fixedDeltaTime * properties.frictionGravityRatio;
+            rigidbody.AddForce(Vector3.up * frictionForce);
+        }
+    }
+
+    private void LivingControl()
+    {
+        if (permaDead)
+        {
+            return;
+        }
+
         //Check states
-        this.CheckFacing();
-        this.CheckGround();
         this.CheckWall();
 
         //Try user interactions
         this.TrySwitch();
-        this.TryJump();
+        this.TryLivingJump();
 
-        //Apply Forces
-        float translationSpeed = this.isInAir ? this.properties.airSpeed : this.properties.speed;
-        float deltaTranslationForce = this.wantedTranslation * translationSpeed * Time.fixedDeltaTime;
-        rigidbody.AddForce(Vector3.right * deltaTranslationForce);
+        if (!(isJumping && currentJumpingTime < currentJumpingNoneControlLimit))
+        {
+            float translationSpeed = this.isInAir ? this.properties.airSpeed : this.properties.speed;
+            float deltaTranslationForce = this.wantedTranslation * translationSpeed * Time.fixedDeltaTime;
+            rigidbody.AddForce(Vector3.right * deltaTranslationForce);
+        }
+        else
+        {
+            Debug.Log("BLOCK");
+        }
 
         if (isJumping)
         {
@@ -236,6 +287,20 @@ public class Player : MonoBehaviour
                     deadElements[i].SetActive(!this.isLiving);
                 }
                 soundPlayer.SwitchSoundEvent?.Invoke();
+
+                //switch jump
+                if (isLiving)
+                {
+                    this.isJumping = false; // Stop jump
+                }
+                else
+                {
+                    if (this.wantedLongJump) // Start floating if player continue pressing jump
+                    {
+                        this.isJumping = true;
+                        this.wantedJump = false;
+                    }
+                }
             }
             else
             {
@@ -299,7 +364,7 @@ public class Player : MonoBehaviour
         this.isClimbing = this.hasLeftWall && facing == Facing.Left || this.hasRightWall && facing == Facing.Right;
     }
 
-    private void TryJump()
+    private void TryLivingJump()
     {
         if (!this.isJumping)
         {
@@ -318,9 +383,7 @@ public class Player : MonoBehaviour
                     this.currentIsSideJump = false;
                     this.Jump();
                     soundPlayer.JumpSoundEvent.Invoke();
-
                 }
-
             }
             else if (!this.isGrounded && (this.hasLeftWall || this.hasRightWall))
             {
@@ -343,7 +406,46 @@ public class Player : MonoBehaviour
             if (this.currentJumpingTime > currentMaxJumpingTime || !this.wantedLongJump && this.currentJumpingTime > currentMinJumpingTime)
             {
                 this.isJumping = false;
-                this.wantedLongJump = false;
+            }
+        }
+    }
+
+    private void TryDeadJump()
+    {
+        if (!this.isJumping)
+        {
+            if (this.isGrounded || timeSinceGrounded < properties.coyoteTime)
+            {
+                // Player is not jumping and is grounded
+                // Player interactions can trigger a jump
+                if (this.wantedJump)
+                {
+                    this.currentJumpingDirection = Vector2.up;
+                    this.currentIsSideJump = false;
+                    this.Jump();
+                    soundPlayer.JumpSoundEvent.Invoke();
+                }
+            }
+            else if (!this.isGrounded)
+            {
+                // Player has finished jumping and is falling
+                // Player can float
+                if (this.wantedJump)
+                {
+                    this.currentJumpingDirection = Vector2.up;
+                    this.currentIsSideJump = true;
+                    this.Jump();
+                }
+            }
+        }
+        else
+        {
+            // Should player continue jumping ?
+            // Depends on player interaction and min and max time of jump.
+            this.currentJumpingTime += Time.deltaTime;
+            if (!this.wantedLongJump && this.currentJumpingTime > currentMinJumpingTime)
+            {
+                this.isJumping = false;
             }
         }
     }

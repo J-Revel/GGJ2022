@@ -16,12 +16,14 @@ public class PlayerProperties : ScriptableObject
     public float jumpImpulsion = 10f;
     public float minJumpingTime = 0.25f;
     public float maxJumpingTime = 0.4f;
+    public float jumpingNoneControlLimit = 0.2f;
 
     [HeaderAttribute("SideJump")]
     public float sideJumpForce = 4000f;
     public float sideJumpImpulsion = 8f;
     public float minSideJumpingTime = 0.15f;
     public float maxSideJumpingTime = 0.3f;
+    public float sideJumpingNoneControlLimit = 0.15f;
 
     [HeaderAttribute("Gravity")]
     public float gravityForce = 2400f;
