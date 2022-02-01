@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlatformCameraController : MonoBehaviour
 {
     public float focalDistance = 3;
-    public Transform target;
     public new Transform camera;
     private Vector3 currentTargetPos;
     private Vector3 startOffset;
@@ -18,6 +17,8 @@ public class PlatformCameraController : MonoBehaviour
     public float offsetRatio = 0.5f;
     public Vector3 offset;
     private Vector3 startTargetPosition;
+
+    public Transform target { get { return Player.instance.transform;}}
     
     void Start()
     {
