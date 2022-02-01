@@ -183,8 +183,16 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        this.CheckPermaDie();
+        if (permaDead)
+        {
+            return;
+        }
+
         float gravityForce = properties.gravityForce * Time.fixedDeltaTime;
         rigidbody.AddForce(Vector3.down * gravityForce);
+
+        this.TrySwitch();
 
         this.CheckFacing();
         this.CheckGround();
@@ -201,14 +209,7 @@ public class Player : MonoBehaviour
 
     private void DeadControl()
     {
-        this.CheckPermaDie();
-        if (permaDead)
-        {
-            return;
-        }
-
         //Try user interactions
-        this.TrySwitch();
         this.TryDeadJump();
 
         if (isJumping)
@@ -242,7 +243,6 @@ public class Player : MonoBehaviour
         this.CheckWall();
 
         //Try user interactions
-        this.TrySwitch();
         this.TryLivingJump();
 
         if (!(isJumping && currentJumpingTime < currentJumpingNoneControlLimit))
@@ -250,10 +250,6 @@ public class Player : MonoBehaviour
             float translationSpeed = this.isInAir ? this.properties.airSpeed : this.properties.speed;
             float deltaTranslationForce = this.wantedTranslation * translationSpeed * Time.fixedDeltaTime;
             rigidbody.AddForce(Vector3.right * deltaTranslationForce);
-        }
-        else
-        {
-            Debug.Log("BLOCK");
         }
 
         if (isJumping)
@@ -297,6 +293,7 @@ public class Player : MonoBehaviour
                 {
                     if (this.wantedLongJump) // Start floating if player continue pressing jump
                     {
+                        Debug.Log("WANTED");
                         this.isJumping = true;
                         this.wantedJump = false;
                     }
