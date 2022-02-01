@@ -18,12 +18,13 @@ MonoBehaviour:
   airSpeed: 1000
   jumpForce: 900
   jumpImpulsion: 10
-  minJumpingTime: 0.2
-  maxJumpingTime: 3
-  sideJumpForce: 0
-  sideJumpImpulsion: 0
+  minJumpingTime: 0
+  maxJumpingTime: 0
+  sideJumpForce: 900
+  sideJumpImpulsion: 2
   minSideJumpingTime: 0
   maxSideJumpingTime: 0
   gravityForce: 1000
   frictionGravityRatio: 0
   coyoteTime: 0.15
+  permaTime: 1
