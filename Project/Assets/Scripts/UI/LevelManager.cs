@@ -96,7 +96,7 @@ public class LevelManager : MonoBehaviour
             }
         }
         
-        instance.LoadLevelCoroutine(selectedLevel + 1);
+        instance.LoadLevel(selectedLevel + 1);
     }
 
     private IEnumerator LoadLevelCoroutine(int levelIndex)
