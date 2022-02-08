@@ -25,6 +25,17 @@ public class PostProcessSelector : MonoBehaviour
         LivingStateManager.RegisterForLifeStateChanges(this.OnLifeStateChanges);
     }
 
+    private void Start()
+    {
+        LevelManager.instance.levelLoadedDelegate += OnLevelLoaded;
+    }
+
+    private void OnLevelLoaded()
+    {
+        aliveVolume.weight = 1f;
+        deadVolume.weight = 0f;
+    }
+
     private void OnDestroy()
     {
         LivingStateManager.UnRegisterForLifeStateChanges(this.OnLifeStateChanges);

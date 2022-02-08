@@ -111,6 +111,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        LevelManager.instance.levelLoadedDelegate += OnLevelLoaded;
         jumpAction.started += context =>
         {
             wantedJump = true;
@@ -135,6 +136,13 @@ public class Player : MonoBehaviour
         interactionAction.Enable();
         switchStateAction.Enable();
         horizontalAction.Enable();
+        LivingStateManager.TriggerLifeChanges(this.isLiving);
+    }
+
+    private void OnLevelLoaded()
+    {
+        isLiving = true;
+        LivingStateManager.TriggerLifeChanges(this.isLiving);
     }
 
     private void Update()

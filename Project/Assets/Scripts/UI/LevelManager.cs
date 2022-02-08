@@ -6,10 +6,11 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
-    private static LevelManager instance;
+    public static LevelManager instance;
 
     [SerializeField]
     private InputAction reloadAction;
+    public System.Action levelLoadedDelegate;
 
     private CanvasGroup canvasGroup;
 
@@ -30,7 +31,6 @@ public class LevelManager : MonoBehaviour
             instance = this;
             canvasGroup = GetComponentInChildren<CanvasGroup>();
             DontDestroyOnLoad(this);
-
             reloadAction.Enable();
         }
     }
@@ -112,6 +112,7 @@ public class LevelManager : MonoBehaviour
         AsyncOperation op = SceneManager.LoadSceneAsync(levelScenes[levelIndex], LoadSceneMode.Single);
         while(!op.isDone)
             yield return null;
+        levelLoadedDelegate?.Invoke();
         while(time > 0)
         {
             time -= Time.deltaTime;
