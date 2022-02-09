@@ -13,7 +13,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3050
+  m_CustomRenderQueue: 2950
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -128,8 +128,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Distortion_Height: 20
-    - _Distortion_Intensity: 0.08
+    - _Distortion_Height: 10
+    - _Distortion_Intensity: 0.03
     - _Distortion_Speed: 3
     - _DstBlend: 0
     - _EnvironmentReflections: 1
@@ -141,7 +141,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
-    - _QueueOffset: 50
+    - _QueueOffset: -50
     - _ReceiveShadows: 1
     - _Shine_Height: 1
     - _Shine_Speed: 0.5
@@ -159,8 +159,11 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Noise_Displacement: {r: 0.2, g: 0, b: 0, a: 0}
+    - _Noise_Displacement_1: {r: -0.2, g: 0.2, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tint: {r: 0, g: 11.181761, b: 9.601093, a: 0}
+    - _Tint: {r: 0.041117836, g: 0.26415092, b: 0.17024224, a: 0}
+    - _Tint_2: {r: 0.09718762, g: 0.5283019, b: 0.5283019, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1246893923940543469
 MonoBehaviour:
